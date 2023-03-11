@@ -1,0 +1,33 @@
+Most recent relative vector calculated below (x, y, z): 
+3.0
+3.0
+3.0
+
+Most recent unit vector calculated below (x, y, z): 
+0.2672612419124244
+0.5345224838248488
+0.8017837257372732
+
+Most recent unit vector (from angles) calculated below (x, y, z): 
+0.5253219888177297
+0.5253219888177297
+0.5253219888177297
+
+Most recent vector magnitude calculated below (x, y, z): 
+126.26163312740731
+
+Most recent momentum calculated below (x, y, z): 
+1725.0
+1195.0
+40.0
+
+Most recent gravitational force calculated below (x, y, z): 
+4.857532999544835e-17
+1.1658079198907604e-16
+5.829039599453801e-37
+
+Most recent electric force calculated below (x, y, z): 
+-7.564466623725403e-20
+5.687505694809211e-18
+-1.263904197782022e-21
+

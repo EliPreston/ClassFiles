@@ -1,0 +1,121 @@
+# Lab 3
+# Name: Eli Preston
+# Student ID: 501152959
+
+
+def solution1(n: float) -> float:
+
+    return 'Number is positive.' if n > 0 else 'Number is zero.' if n == 0 else 'Number is negative.'
+    
+
+def solution2(n: float) -> float:
+    numSign = 'positive ' if n > 0 else 'zero   ' if n == 0 else 'negative '
+    numMag = 'small' if abs(n) < 1 else 'large' if abs(n) > 1000 else ''
+
+    return numSign + numMag
+    
+
+def solution3(n: int) -> int:
+
+    if n < 0:
+        n = n*-1
+    digits = '1' if n < 10 else '2' if 10 <= n <= 99 else '3' if 100 <= n <= 999 else '4' if 1000 <= n <= 9999 else '5' if 10000 <= n <= 99999 else '6' if 100000 <= n <= 999999 else 'lots'
+    return digits
+ 
+    
+def solution4(n1, n2, n3):
+    
+    return 'all the same' if n1 == n2 == n3 else 'all different' if n1 != n2 != n3 else 'neither'
+
+    
+
+def solution5(n1, n2, n3):
+
+    return 'increasing' if n1 < n2 < n3 else 'decreasing' if n1 > n2 > n3 else 'neither'
+    
+    
+
+def solution6(n1, n2, n3):
+
+    userIn = str(input("Should increasing/decreasing be strict or lenient? \n"))
+
+    try:
+        if userIn.lower() == 'strict':
+            return 'increasing' if n1 < n2 < n3 else 'decreasing' if n1 > n2 > n3 else 'neither'
+        else:
+            return 'increasing and decreasing' if n1 == n2 == n3 else 'increasing' if n1 <= n2 <= n3 else 'decreasing' if n1 >= n2 >= n3 else 'increasing and decreasing' 
+    
+    except:
+        return "Invalid input"
+
+    
+def solution7(n1, n2, n3):
+    
+    nums = [n1, n2, n3]
+
+    if (sorted(nums) == nums) or (sorted(nums, reverse=True) == nums):
+        return 'in order'
+    return 'not in order'
+
+    
+def solution8(n1, n2, n3, n4):
+    nums = [n1, n2, n3, n4]
+    
+    if n1 == n2 == n3 == n4:
+        return 'two pairs'
+    elif n1 == n2:
+        count1 = nums.count(n1)
+        count2 = nums.count(n3)
+        if (count1 == 2) and (count2 == 2):
+            return 'two pairs'
+        return 'not two pairs'
+    else:
+        count1 = nums.count(n1)
+        count2 = nums.count(n2)
+        if (count1 == 2) and (count2 == 2):
+            return 'two pairs'
+        return 'not two pairs'
+    
+
+def solution9(temp: int, measurement: str):
+
+    if measurement == 'C':
+        return 'solid' if temp <= 0 else 'liquid' if 0 < temp < 100 else 'gaseous'
+    if measurement == 'F':
+        return 'solid' if temp <= 32 else 'liquid' if 32 < temp < 212 else 'gaseous'
+
+
+def solution10(lG: str) -> float:
+
+    gradeDictionary = {
+        'A': 4,
+        'B': 3,
+        'C': 2,
+        'D': 1, 
+        'F': 0
+    }
+
+    return gradeDictionary[lG[0].upper()] - 0.3 if '-' in lG else gradeDictionary[lG[0].upper()] + 0.3 if '+' in lG else gradeDictionary[lG[0].upper()]
+
+    # if '-' in lG:
+    #     return gradeDictionary[lG[0].upper()] - 0.3
+    # elif '+' in lG:
+    #     return gradeDictionary[lG[0].upper()] + 0.3
+    # return gradeDictionary[lG[0].upper()]
+
+    
+if __name__ == "__main__":
+
+    
+    # Example Test cases
+    print('solution1: ' + solution1(0.0))
+    print('solution2: ' + solution2(0.00))
+    print('solution3: ' + solution3(0))
+    print('solution4: ' + solution4(-1, -2, -3))
+    print('solution5: ' + solution5(-3, 2, 100))
+    print('solution6: ' + solution6(2, 1, 1))
+    print('solution7: ' + solution7(1, 2, 5))
+    print('solution8: ' + solution8(2, 2, 2, 3))
+    print('solution9: ' + solution9(-1, 'C'))
+    print('solution10: ' + str(solution10("B-")))
+    
