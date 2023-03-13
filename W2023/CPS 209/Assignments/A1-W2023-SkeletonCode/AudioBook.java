@@ -21,6 +21,12 @@ public class AudioBook extends AudioContent
 	{
 		// Make use of the constructor in the super class AudioContent. 
 		// Initialize additional AudioBook instance variables. 
+		super(title, year, id, type, audioFile, length);
+		this.author = author;
+		this.narrator = narrator;
+		this.chapterTitles = new ArrayList<String>();
+		this.chapters = new ArrayList<String>();
+		this.currentChapter = 0;
 	}
 	
 	public String getType()
@@ -33,7 +39,8 @@ public class AudioBook extends AudioContent
 	// see the video
 	public void printInfo()
 	{
-		
+		super.printInfo();
+		System.out.println("Author: " + author + " , Narrator: " + narrator);
 	}
 	
   // Play the audiobook by setting the audioFile to the current chapter title (from chapterTitles array list) 
@@ -41,6 +48,8 @@ public class AudioBook extends AudioContent
 	// Then make use of the the play() method of the superclass
 	public void play()
 	{
+		setAudioFile(chapterTitles.get(currentChapter) + "\n" + chapters.get(currentChapter));
+		super.play();
 		
 	}
 	
@@ -48,7 +57,11 @@ public class AudioBook extends AudioContent
 	// See the video
 	public void printTOC()
 	{
-		
+		for (int i = 0; i < chapters.size(); i++) 
+		{
+			System.out.println(chapterTitles.get(i));
+			System.out.println();
+		}
 	}
 
 	// Select a specific chapter to play - nothing to do here
@@ -63,6 +76,20 @@ public class AudioBook extends AudioContent
 	//Two AudioBooks are equal if their AudioContent information is equal and both the author and narrators are equal
 	public boolean equals(Object other)
 	{
+		AudioBook audbk = (AudioBook) other;
+		boolean tt = this.getTitle().equals(audbk.getTitle());
+		boolean yr = this.getYear() == audbk.getYear();
+		boolean id = this.getId().equals(audbk.getId());
+		boolean tp = this.getType().equals(audbk.getType());
+		boolean af = this.getAudioFile().equals(audbk.getAudioFile());
+		boolean lg = this.getLength() == audbk.getLength();	
+		boolean auth = this.getAuthor().equals(audbk.getAuthor());
+		boolean narr = this.getNarrator().equals(audbk.getNarrator());
+		// boolean chpT = this.getChapterTitles().equals(audbk.getChapterTitles());
+		// boolean chps = this.getChapters().equals(audbk.getChapters());
+
+
+		if (tt && yr && id && tp && af && lg && auth && narr) {return true;}
 		return false;
 	}
 	
@@ -110,5 +137,6 @@ public class AudioBook extends AudioContent
 	{
 		this.chapters = chapters;
 	}
+
 
 }

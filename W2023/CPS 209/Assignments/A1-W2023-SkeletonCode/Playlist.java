@@ -47,20 +47,30 @@ public class Playlist
 	 */
 	public void printContents()
 	{
+		ArrayList<AudioContent> audConts = this.getContent();
 		
+		for (int i = 0; i < audConts.size(); i++)
+		{
+			int index = i+1;
+			System.out.print(index + ". ");
+			audConts.get(i).printInfo();
+		}
 	}
 
 	// Play all the AudioContent in the contents list
 	public void playAll()
 	{
-		
+		for (int i = 0; i < this.contents.size(); i++)
+		{
+			this.contents.get(i).play();
+		}
 	}
 	
 	// Play the specific AudioContent from the contents array list.
 	// First make sure the index is in the correct range. 
 	public void play(int index)
 	{
-		
+		this.contents.get(index).play();
 	}
 	
 	public boolean contains(int index)
@@ -71,8 +81,12 @@ public class Playlist
 	// Two Playlists are equal if their titles are equal
 	public boolean equals(Object other)
 	{
+		Playlist oP = (Playlist) other;
+		if (this.getTitle().equals(oP.getTitle())) {return true;}
 		return false;
+
 	}
+
 	
 	// Given an index of an audio content object in contents array list,
 	// remove the audio content object from the array list

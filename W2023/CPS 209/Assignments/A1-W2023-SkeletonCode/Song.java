@@ -18,6 +18,11 @@ public class Song extends AudioContent // implement the Comparable interface
 	{
 		// Make use of the constructor in the super class AudioContent. 
 		// Initialize additional Song instance variables. 
+		super(title, year, id, type, audioFile, length);
+		this.artist = artist;
+		this.composer = composer;
+		this.genre = genre;
+		this.lyrics = lyrics;
 	}
 	
 	public String getType()
@@ -29,13 +34,15 @@ public class Song extends AudioContent // implement the Comparable interface
 	// by making use of the printInfo() method in superclass AudioContent and then print artist, composer, genre 
 	public void printInfo()
 	{
-		
+		super.printInfo();
+		System.out.println("Artist: " + artist + " , Composer: " + composer + " , Genre: " + genre);
 	}
 	
 	// Play the song by setting the audioFile to the lyrics string and then calling the play() method of the superclass
 	public void play()
 	{
-		
+		setAudioFile(lyrics);
+		super.play();
 	}
 	
 	public String getComposer()
@@ -79,6 +86,17 @@ public class Song extends AudioContent // implement the Comparable interface
 	// Make use of the superclass equals() method
 	public boolean equals(Object other)
 	{
+		Song s2 = (Song) other;
+		boolean tt = this.getTitle().equals(s2.getTitle());
+		boolean yr = this.getYear() == s2.getYear();
+		boolean id = this.getId().equals(s2.getId());
+		boolean tp = this.getType().equals(s2.getType());
+		boolean af = this.getAudioFile().equals(s2.getAudioFile());
+		boolean lg = this.getLength() == s2.getLength();
+		boolean cm = this.getComposer().equals(s2.getComposer());
+		boolean ar = this.getArtist().equals(s2.getArtist());
+	
+		if (tt && yr && id && tp && af && lg && cm && ar) {return true;}
 		return false;
 	}
 	
@@ -87,6 +105,7 @@ public class Song extends AudioContent // implement the Comparable interface
 	// This method will allow songs to be sorted alphabetically
 	public int compareTo(Song other)
 	{
-		return 0;
+		return this.getTitle().compareTo(other.getTitle());
+		
 	}
 }
