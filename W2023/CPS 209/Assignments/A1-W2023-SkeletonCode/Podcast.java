@@ -52,6 +52,16 @@ public class Podcast extends AudioContent
 		System.out.println("Host: " + host + "\nSeasons: " + seasons.size());
 	}
 
+    public void play()
+    {
+        String epFile = this.getSeasons().get(0).getEpisodeFiles().get(0);
+        // setAudioFile("Season 1: " + epTitle + "\n" + epFile);
+        setAudioFile("Season 1:\n" + epFile);
+        super.play();
+
+        // setAudioFile(seasons.);
+    }
+
     public void play(int season, int episode)
     {
         setAudioFile(this.getSeasons().get(season-1).getEpisodeFiles().get(episode-1));

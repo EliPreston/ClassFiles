@@ -314,10 +314,8 @@ public class Library
 			errorMsg = "Podcast Season Not Found";
 			return false;
 		}
-		podcasts.get(index-1).getSeasons().get(season-1).printTOC();
-
-
-		return false;
+		currPod.getSeasons().get(season-1).printTOC();
+		return true;
 	}
 	
 	// Play a chapter of an audio book from list of audiobooks
@@ -328,9 +326,16 @@ public class Library
 			errorMsg = "Audiobook Not Found";
 			return false;
 		}
+		AudioBook aud = audiobooks.get(index-1);
 		
-		audiobooks.get(index-1).selectChapter(chapter);
-		audiobooks.get(index-1).play();
+		if (chapter < 1 || chapter > aud.getNumberOfChapters())
+		{
+			errorMsg = "Audiobook Chapter Not Found";
+			return false;
+		}
+		
+		aud.selectChapter(chapter);
+		aud.play();
 		return true;
 	}
 	
@@ -388,7 +393,6 @@ public class Library
 		{
 			if (playlists.get(i).getTitle().equals(playlistTitle))
 			{
-				System.out.println(playlistTitle);
 				playlists.get(i).playAll();
 				return true;
 			}
@@ -398,7 +402,7 @@ public class Library
 	}
 	
 	// Play a specific song/audiobook in a playlist
-	public boolean playPlaylist(String playlistTitle, int indexInPL)
+	public boolean playPlaylist(String playlistTitle, int indexInPl)
 	{
 
 		for (int i = 0; i < playlists.size(); i++)
@@ -406,7 +410,8 @@ public class Library
 			if (playlists.get(i).getTitle().equals(playlistTitle))
 			{
 				System.out.println(playlistTitle);
-				playlists.get(i).play(indexInPL-1);
+				if (indexInPl < 1 || playlists.size() )
+				playlists.get(i).play(indexInPl-1);
 				return true;
 			}
 		}
@@ -419,13 +424,8 @@ public class Library
 	// for that list
 	public boolean addContentToPlaylist(String type, int index, String playlistTitle)
 	{
-		int plIndex = 0;
-		if (plIndex > playlists.size())
-		{
-			errorMsg = "Invalid playlist index";
-			return false;
-		}
-
+		int plIndex = -1;
+	
 		for (int i = 0; i < playlists.size(); i++)
 		{
 			if (playlists.get(i).getTitle().equals(playlistTitle))
@@ -434,8 +434,20 @@ public class Library
 					break;
 				}
 		}
+		if (plIndex == -1)
+		{
+			errorMsg = "Playlist Not Found";
+			return false;
+		}
+
 		
 		if (type.equalsIgnoreCase("SONG")) {
+			if (index < 1 || index > songs.size())
+			{
+				errorMsg = "Song Not Found";
+				return false;
+			}
+
 			Song s = songs.get(index-1);
 			playlists.get(plIndex).addContent(s);
 			return true;
@@ -443,6 +455,12 @@ public class Library
 
 		if (type.equalsIgnoreCase("AUDIOBOOK"))
 		{
+			if (index < 1 || index > audiobooks.size())
+			{
+				errorMsg = "Audiobook Not Found";
+				return false;
+			}
+
 			AudioBook au = audiobooks.get(index-1);
 			playlists.get(plIndex).addContent(au);
 			return true;
@@ -450,11 +468,18 @@ public class Library
 
 		if (type.equalsIgnoreCase("PODCAST"))
 		{
+			if (index < 1 || index > podcasts.size())
+			{
+				errorMsg = "Podcast Not Found";
+				return false;
+			}
+
 			Podcast pod = podcasts.get(index-1);
 			playlists.get(plIndex).addContent(pod);
 			return true;
 		}
 
+		errorMsg = "Audio Content Type Not Found";
 		return false;
 
 	}

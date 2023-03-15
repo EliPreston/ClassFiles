@@ -71,10 +71,13 @@ public class MyAudioUI
 				}
 				AudioContent content = store.getContent(index);
 				if (content == null)
+				{
 					System.out.println("Content Not Found in Store");
+				}
 				else if (!mylibrary.download(content))
-						System.out.println(mylibrary.getErrorMessage());
-				
+				{
+					System.out.println(mylibrary.getErrorMessage());
+				}
 						
 			}
 			// Get the *library* index (index of a song based on the songs list)
@@ -130,7 +133,7 @@ public class MyAudioUI
 					index = scanner.nextInt();
 					scanner.nextLine();
 
-					System.out.println("Chapter: ");
+					System.out.print("Chapter: ");
 					if (scanner.hasNextInt())
 					{
 						chapter = scanner.nextInt();
@@ -187,13 +190,13 @@ public class MyAudioUI
 					index = scanner.nextInt();
 					scanner.nextLine();
 
-					System.out.println("Season Number: ");
+					System.out.print("Season Number: ");
 					if (scanner.hasNextInt())
 					{
 						season = scanner.nextInt();
 						scanner.nextLine();
 
-						System.out.println("Episode Number: ");
+						System.out.print("Episode Number: ");
 						if (scanner.hasNextInt())
 						{
 							episode = scanner.nextInt();

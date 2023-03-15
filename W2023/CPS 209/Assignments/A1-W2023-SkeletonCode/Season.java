@@ -80,7 +80,7 @@ public class Season {
         for (int i = 0; i < episodeTitles.size(); i++)
         {
             int epNum = i+1;
-            System.out.println("Chapter " + epNum + ". " + episodeTitles.get(i));
+            System.out.println("Episode " + epNum + ". " + episodeTitles.get(i));
 			
 			if (i == episodeTitles.size()-1) { break;}
 			System.out.println("");
