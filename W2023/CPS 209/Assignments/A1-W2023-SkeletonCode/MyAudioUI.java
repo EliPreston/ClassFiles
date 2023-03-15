@@ -73,12 +73,30 @@ public class MyAudioUI
 					System.out.println("Content Not Found in Store");
 				else if (!mylibrary.download(content))
 						System.out.println(mylibrary.getErrorMessage());
-									
+				
+						
 			}
 			// Get the *library* index (index of a song based on the songs list)
 			// of a song from the keyboard and play the song 
 			else if (action.equalsIgnoreCase("PLAYSONG")) 
 			{
+				int index = 0;
+				System.out.print("Song Number: ");
+				if (scanner.hasNextInt())
+				{
+					index = scanner.nextInt();
+					scanner.nextLine();
+				}
+
+				boolean played = mylibrary.playSong(index);
+				if (!played)
+				{
+					System.out.println(mylibrary.getErrorMessage());
+				}
+
+
+				
+
 				// Print error message if the song doesn't exist in the library
 			}
 			// Print the table of contents (TOC) of an audiobook that
@@ -86,6 +104,19 @@ public class MyAudioUI
 			// from the keyboard - the index is based on the list of books in the library
 			else if (action.equalsIgnoreCase("BOOKTOC")) 
 			{
+				int index = 0;
+				System.out.print("Audio Book Number: ");
+				if (scanner.hasNextInt())
+				{
+					index = scanner.nextInt();
+					scanner.nextLine();
+				}
+				
+				boolean played = mylibrary.printAudioBookTOC(index);
+				if (!played)
+				{
+					System.out.println(mylibrary.getErrorMessage());
+				}
 			// Print error message if the book doesn't exist in the library
 			}
 			// Similar to playsong above except for audio book
@@ -93,7 +124,26 @@ public class MyAudioUI
 			// number from the keyboard - see class Library
 			else if (action.equalsIgnoreCase("PLAYBOOK")) 
 			{
-				
+				int index = 0;
+				int chapter = 0;
+				System.out.print("Audio Book Number: ");
+				if (scanner.hasNextInt())
+				{
+					index = scanner.nextInt();
+					scanner.nextLine();
+
+					System.out.print("Chapter: ");
+					if (scanner.hasNextInt())
+					{
+						chapter = scanner.nextInt();
+						scanner.nextLine();
+					}
+				}
+				boolean played = mylibrary.playAudioBook(index, chapter);
+				if (!played)
+				{
+					System.out.println(mylibrary.getErrorMessage());
+				}
 			}
 			// Print the episode titles for the given season of the given podcast
 			// In addition to the podcast index from the list of podcasts, 
@@ -124,19 +174,67 @@ public class MyAudioUI
 			// see class Library for the method to call
 			else if (action.equalsIgnoreCase("PLAYPL")) 
 			{
+				int index = 0;
+				String title = "";
 				
+				System.out.print("Playlist title: ");
+				if (scanner.hasNext())
+				{
+					title = scanner.nextLine();
+
+					System.out.print("Playlist Audiocontent #: "); 
+					if (scanner.hasNextInt())
+					{
+						index = scanner.nextInt();
+						scanner.nextLine();
+					}
+				}
+
+				boolean playedFromPl = mylibrary.playPlaylist(title, index);
+				if (!playedFromPl)
+				{
+					System.out.println(mylibrary.getErrorMessage());
+				}
 			}
 			// Delete a song from the list of songs in mylibrary and any play lists it belongs to
 			// Read a song index from the keyboard
 			// see class Library for the method to call
 			else if (action.equalsIgnoreCase("DELSONG")) 
 			{
+				int index = 0;
+				System.out.print("Library Song #: ");
+				if (scanner.hasNextInt())
+				{
+					index = scanner.nextInt();
+					scanner.nextLine();
+				}
+
+				boolean deletedLibrary = mylibrary.deleteSong(index);
+				// boolean deletedPlaylists = mylibrary.delContentFromPlaylist(index, title);
+				if (!deletedLibrary)
+				{
+					System.out.println(mylibrary.getErrorMessage());
+				}
+
 					
 			}
 			// Read a title string from the keyboard and make a playlist
 			// see class Library for the method to call
 			else if (action.equalsIgnoreCase("MAKEPL")) 
 			{
+				String title = "";
+				System.out.print("Playlist Title: ");
+				if (scanner.hasNext())
+				{
+					title = scanner.nextLine();
+				}
+				boolean validPL = mylibrary.makePlaylist(title);
+				if (!validPL)
+				{
+					System.out.println(mylibrary.getErrorMessage());
+				}
+
+
 				
 			}
 			// Print the content information (songs, audiobooks, podcasts) in the playlist
@@ -144,6 +242,18 @@ public class MyAudioUI
 		  // see class Library for the method to call
 			else if (action.equalsIgnoreCase("PRINTPL"))	// print playlist content
 			{
+				String title = "";
+				System.out.print("Playlist Title: ");
+				if (scanner.hasNext())
+				{
+					title = scanner.nextLine();
+				}
+
+				boolean validPL = mylibrary.printPlaylist(title);
+				if (!validPL)
+				{
+					System.out.println(mylibrary.getErrorMessage());
+				}
 				
 			}
 			// Add content (song, audiobook, podcast) from mylibrary (via index) to a playlist
@@ -152,14 +262,60 @@ public class MyAudioUI
 		  // see class Library for the method to call
 			else if (action.equalsIgnoreCase("ADDTOPL")) 
 			{
-				
+				String title = "";
+				String contentType = "";
+				int libraryContentNum = 0;
+
+				System.out.print("Playlist Title: ");
+				if (scanner.hasNext())
+				{
+					title = scanner.nextLine();
+
+					System.out.print("Content Type [SONG, PODCAST, AUDIOBOOK]: ");
+					if (scanner.hasNext())
+					{
+						contentType = scanner.nextLine();
+						System.out.print("Library Content: ");
+						if (scanner.hasNextInt())
+						{
+							libraryContentNum = scanner.nextInt();
+							scanner.nextLine();
+						}
+					}
+				}
+
+				boolean added = mylibrary.addContentToPlaylist(contentType, libraryContentNum, title);
+				if (!added)
+				{
+					System.out.println(mylibrary.getErrorMessage());
+				}
 			}
 			// Delete content from play list based on index from the playlist
 			// Read the playlist title string and the playlist index
 		  // see class Library for the method to call
 			else if (action.equalsIgnoreCase("DELFROMPL")) 
 			{
-				
+				int index = 0;
+				String title = "";
+
+				System.out.print("Playlist title: ");
+				if (scanner.hasNext())
+				{
+					title = scanner.nextLine();
+
+					System.out.print("Content Number: "); 
+					if (scanner.hasNextInt())
+					{
+						index = scanner.nextInt();
+						scanner.nextLine();
+					}
+				}
+
+				boolean delFromPl = mylibrary.delContentFromPlaylist(index, title);
+				if (!delFromPl)
+				{
+					System.out.println(mylibrary.getErrorMessage());
+				}
 			}
 			
 			else if (action.equalsIgnoreCase("SORTBYYEAR")) // sort songs by year

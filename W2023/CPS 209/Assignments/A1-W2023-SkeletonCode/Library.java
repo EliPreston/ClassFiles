@@ -46,6 +46,7 @@ public class Library
 		{
 			Song s = (Song) content;
 
+	
 			if (songs.contains(s)) 
 			{
 				errorMsg = "Song already downloaded.";
@@ -62,6 +63,7 @@ public class Library
 		else if (content.getType().equals(AudioBook.TYPENAME)) 
 		{
 			AudioBook ab = (AudioBook) content;
+
 			if (audiobooks.contains(ab)) 
 			{
 				errorMsg = "Audiobook already downloaded.";
@@ -138,8 +140,7 @@ public class Library
 		for (int i = 0; i < playlists.size(); i++)
 		{
 			int index = i + 1;
-			System.out.print("" + index + ". ");
-			playlists.get(i).getTitle();
+			System.out.print(index + ". " + playlists.get(i).getTitle());
 			System.out.println();	
 		}
 	}
@@ -150,10 +151,11 @@ public class Library
 		// First create a new (empty) array list of string 
 		// Go through the songs array list and add the artist name to the new arraylist only if it is
 		// not already there. Once the artist array list is complete, print the artists names
+	
 		ArrayList<String> artists = new ArrayList<>();
-		for (int i = 0; i < songs.size(); i++)
+		for (int i = 0; i < this.songs.size(); i++)
 		{
-			if (artists.contains(songs.get(i).getComposer()))
+			if (!artists.contains(songs.get(i).getComposer()))
 			{
 				artists.add(songs.get(i).getComposer());
 			}
@@ -172,8 +174,8 @@ public class Library
 	// also go through all playlists and remove it from any playlist as well if it is part of the playlist
 	public boolean deleteSong(int index)
 	{
-		Song songToDel = songs.get(index);
-		songs.remove(index);
+		Song songToDel = songs.get(index-1);
+		songs.remove(index-1);
 
 		if (playlists.size() > 0) 
 		{
@@ -339,10 +341,8 @@ public class Library
 	// Print list of content information (songs, audiobooks etc) in playlist named title from list of playlists
 	public boolean printPlaylist(String title)
 	{
-		System.out.print(title);
-
 		for (int i = 0; i < playlists.size(); i++)
-		{
+		{			
 			if (playlists.get(i).getTitle().equals(title))
 			{
 				playlists.get(i).printContents();
@@ -375,14 +375,13 @@ public class Library
 	// Play a specific song/audiobook in a playlist
 	public boolean playPlaylist(String playlistTitle, int indexInPL)
 	{
-		System.out.print(playlistTitle);
 
 		for (int i = 0; i < playlists.size(); i++)
 		{
 			if (playlists.get(i).getTitle().equals(playlistTitle))
 			{
 				System.out.println(playlistTitle);
-				playlists.get(i).play(indexInPL);
+				playlists.get(i).play(indexInPL-1);
 				return true;
 			}
 		}
@@ -395,8 +394,13 @@ public class Library
 	// for that list
 	public boolean addContentToPlaylist(String type, int index, String playlistTitle)
 	{
-
 		int plIndex = 0;
+		if (plIndex > playlists.size())
+		{
+			errorMsg = "Invalid playlist index";
+			return false;
+		}
+
 		for (int i = 0; i < playlists.size(); i++)
 		{
 			if (playlists.get(i).getTitle().equals(playlistTitle))
@@ -406,15 +410,23 @@ public class Library
 				}
 		}
 		
-		if (type.equals(Song.TYPENAME)) {
-			Song s = songs.get(index);
+		if (type.equalsIgnoreCase("SONG")) {
+			Song s = songs.get(index-1);
 			playlists.get(plIndex).addContent(s);
 			return true;
 		}
 
-		if (type.equals(AudioBook.TYPENAME))
+		// if (type.equals(Song.TYPENAME)) {
+		// 	System.out.println("check song type passed");
+
+		// 	Song s = songs.get(index);
+		// 	playlists.get(plIndex).addContent(s);
+		// 	return true;
+		// }
+
+		if (type.equalsIgnoreCase("AUDIOBOOK"))
 		{
-			AudioBook au = audiobooks.get(index);
+			AudioBook au = audiobooks.get(index-1);
 			playlists.get(plIndex).addContent(au);
 			return true;
 		}
@@ -428,27 +440,6 @@ public class Library
 
 		return false;
 
-		// if (type.equals(Song.TYPENAME))
-		// {
-		// 	Song s = songs.get(index);
-		// 	for (int i = 0; i < playlists.size(); i++)
-		// 	{
-		// 		if (playlists.get(i).getTitle().equals(playlistTitle))
-		// 		{
-		// 			playlists.get(i).addContent(s);
-		// 			return true;
-		// 		}
-		// 	}
-		// 	return false;
-		// }
-
-		// if (type.equals(AudioBook.TYPENAME))
-		// {
-		// 	AudioBook au = audiobooks.get(index);
-		// 	for (int i = 0; i < playlist.size)
-		// 	return true;
-		// }
-		// return false;
 	}
 
 	
@@ -472,6 +463,19 @@ public class Library
 		return false;
 		
 	}
+
+	public int numSongs()
+	{
+		return songs.size();
+	}
+	public int numAudbks()
+	{
+		return audiobooks.size();
+	}
+	// public int numPods()
+	// {
+	// 	return podcasts.size();
+	// }
 	
 }
 

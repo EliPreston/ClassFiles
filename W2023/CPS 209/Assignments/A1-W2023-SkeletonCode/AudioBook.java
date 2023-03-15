@@ -24,8 +24,12 @@ public class AudioBook extends AudioContent
 		super(title, year, id, type, audioFile, length);
 		this.author = author;
 		this.narrator = narrator;
-		this.chapterTitles = new ArrayList<String>();
-		this.chapters = new ArrayList<String>();
+
+		setChapterTitles(chapterTitles);
+		this.chapterTitles = getChapterTitles();
+
+		setChapters(chapters);
+		this.chapters = getChapters();
 		this.currentChapter = 0;
 	}
 	
@@ -57,10 +61,15 @@ public class AudioBook extends AudioContent
 	// See the video
 	public void printTOC()
 	{
-		for (int i = 0; i < chapters.size(); i++) 
+		for (int i = 0; i < chapterTitles.size(); i++) 
 		{
-			System.out.println(chapterTitles.get(i));
-			System.out.println();
+
+			int bookNum = i+1;
+			System.out.println("Chapter " + bookNum + ". " + chapterTitles.get(i));
+			
+			if (i == chapterTitles.size()-1) { break;}
+			System.out.println("");
+
 		}
 	}
 

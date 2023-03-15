@@ -81,7 +81,7 @@ public class AudioContentStore
 			book = new AudioBook("Shogun", 2018, "284", AudioBook.TYPENAME,  "", 3213,
 					"James Clavel", "Ralph Lister", makeSHChapterTitles(), makeSHChapters());
 			contents.add(book);
-			
+
 			// Create a podcast object if you are doing the bonus see the makeSeasons() method below
 			// It is currently commented out. It makes use of a class Season you may want to also create
 			// or change it to something else

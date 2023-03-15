@@ -47,6 +47,7 @@ public class Playlist
 	 */
 	public void printContents()
 	{
+
 		ArrayList<AudioContent> audConts = this.getContent();
 		
 		for (int i = 0; i < audConts.size(); i++)
@@ -54,6 +55,7 @@ public class Playlist
 			int index = i+1;
 			System.out.print(index + ". ");
 			audConts.get(i).printInfo();
+			System.out.println("");
 		}
 	}
 
