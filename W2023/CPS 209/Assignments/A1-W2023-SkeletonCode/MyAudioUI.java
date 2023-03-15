@@ -1,7 +1,8 @@
-import java.util.ArrayList;
-import java.util.Collections;
+// import java.util.ArrayList;
+// import java.util.Collections;
+// import java.util.StringTokenizer;
 import java.util.Scanner;
-import java.util.StringTokenizer;
+
 
 // Simulation of a Simple Text-based Music App (like Apple Music)
 
@@ -94,9 +95,6 @@ public class MyAudioUI
 					System.out.println(mylibrary.getErrorMessage());
 				}
 
-
-				
-
 				// Print error message if the song doesn't exist in the library
 			}
 			// Print the table of contents (TOC) of an audiobook that
@@ -112,8 +110,8 @@ public class MyAudioUI
 					scanner.nextLine();
 				}
 				
-				boolean played = mylibrary.printAudioBookTOC(index);
-				if (!played)
+				boolean listed = mylibrary.printAudioBookTOC(index);
+				if (!listed)
 				{
 					System.out.println(mylibrary.getErrorMessage());
 				}
@@ -132,7 +130,7 @@ public class MyAudioUI
 					index = scanner.nextInt();
 					scanner.nextLine();
 
-					System.out.print("Chapter: ");
+					System.out.println("Chapter: ");
 					if (scanner.hasNextInt())
 					{
 						chapter = scanner.nextInt();
@@ -151,6 +149,27 @@ public class MyAudioUI
 			// see class Library for the method to call
 			else if (action.equalsIgnoreCase("PODTOC")) 
 			{
+				int index = 0;
+				int season = 0;
+				System.out.print("Podcast Number: ");
+				if (scanner.hasNextInt())
+				{
+					index = scanner.nextInt();
+					scanner.nextLine();
+
+					System.out.print("Season Number: ");
+					if (scanner.hasNextInt())
+					{
+						season = scanner.nextInt();
+						scanner.nextLine();
+					}
+				}
+				
+				boolean listed = mylibrary.printPodcastEpisodes(index, season);
+				if (!listed)
+				{
+					System.out.println(mylibrary.getErrorMessage());
+				}
 				
 			}
 			// Similar to playsong above except for podcast
@@ -159,14 +178,53 @@ public class MyAudioUI
 			// see class Library for the method to call
 			else if (action.equalsIgnoreCase("PLAYPOD")) 
 			{
-				
+				int index = 0;
+				int season = 0;
+				int episode = 0;
+				System.out.print("Podcast Number: ");
+				if (scanner.hasNextInt())
+				{
+					index = scanner.nextInt();
+					scanner.nextLine();
+
+					System.out.println("Season Number: ");
+					if (scanner.hasNextInt())
+					{
+						season = scanner.nextInt();
+						scanner.nextLine();
+
+						System.out.println("Episode Number: ");
+						if (scanner.hasNextInt())
+						{
+							episode = scanner.nextInt();
+							scanner.nextLine();
+						}
+					}
+				}
+
+				boolean playedPodcast = mylibrary.playPodcast(index, season, episode);
+				if (!playedPodcast)
+				{
+					System.out.println(mylibrary.getErrorMessage());
+				}
 			}
 			// Specify a playlist title (string) 
 			// Play all the audio content (songs, audiobooks, podcasts) of the playlist 
 			// see class Library for the method to call
 			else if (action.equalsIgnoreCase("PLAYALLPL")) 
 			{
-				
+				String title = "";
+				System.out.print("Playlist Title: ");
+				if (scanner.hasNext())
+				{
+					title = scanner.nextLine();
+				}
+
+				boolean playedPlaylist = mylibrary.playPlaylist(title);
+				if (!playedPlaylist)
+				{
+					System.out.println(mylibrary.getErrorMessage());
+				}
 			}
 			// Specify a playlist title (string) 
 			// Read the index of a song/audiobook/podcast in the playist from the keyboard 
@@ -177,7 +235,7 @@ public class MyAudioUI
 				int index = 0;
 				String title = "";
 				
-				System.out.print("Playlist title: ");
+				System.out.print("Playlist Title: ");
 				if (scanner.hasNext())
 				{
 					title = scanner.nextLine();
@@ -333,5 +391,6 @@ public class MyAudioUI
 
 			System.out.print("\n>");
 		}
+		scanner.close();
 	}
 }

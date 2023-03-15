@@ -65,6 +65,7 @@ public class Playlist
 		for (int i = 0; i < this.contents.size(); i++)
 		{
 			this.contents.get(i).play();
+			System.out.println("");
 		}
 	}
 	

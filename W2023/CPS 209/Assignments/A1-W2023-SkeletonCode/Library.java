@@ -7,11 +7,10 @@ import java.util.Comparator;
  */
 public class Library
 {
-	private ArrayList<Song> 			songs; 
+	private ArrayList<Song> 		songs; 
 	private ArrayList<AudioBook> 	audiobooks;
 	private ArrayList<Playlist> 	playlists; 
-	
-  //private ArrayList<Podcast> 	podcasts;
+  	private ArrayList<Podcast> 		podcasts;
 	
 	// Public methods in this class set errorMesg string 
 	// Error Messages can be retrieved from main in class MyAudioUI by calling  getErrorMessage()
@@ -25,10 +24,10 @@ public class Library
 
 	public Library()
 	{
-		songs 			= new ArrayList<Song>(); 
+		songs 		= new ArrayList<Song>(); 
 		audiobooks 	= new ArrayList<AudioBook>(); ;
 		playlists   = new ArrayList<Playlist>();
-	  //podcasts		= new ArrayList<Podcast>(); ;
+	  	podcasts	= new ArrayList<Podcast>(); ;
 	}
 	/*
 	 * Download audio content from the store. Since we have decided (design decision) to keep 3 separate lists in our library
@@ -45,8 +44,6 @@ public class Library
 		if (content.getType().equals(Song.TYPENAME)) 
 		{
 			Song s = (Song) content;
-
-	
 			if (songs.contains(s)) 
 			{
 				errorMsg = "Song already downloaded.";
@@ -77,22 +74,23 @@ public class Library
 			return false;
 			
 		} 
-		// else if (content.getType().equals(Podcast.TYPENAME)) 
-		// {
-		// 	Podcast p = (Podcast) content;
-		// 	if (podcasts.contains(p)) 
-		// 	{
-		// 		errorMsg = "Podcast already downloaded.";
-		// 		return false;
-		// 	}
-		// 	else if (!podcasts.contains(p))
-		// 	{
-		// 		podcasts.add(p);
-		// 		return true;
-		// 	}
-		// 	return false;
 
-		// }
+		else if (content.getType().equals(Podcast.TYPENAME)) 
+		{
+			Podcast p = (Podcast) content;
+			if (podcasts.contains(p)) 
+			{
+				errorMsg = "Podcast already downloaded.";
+				return false;
+			}
+			else if (!podcasts.contains(p))
+			{
+				podcasts.add(p);
+				return true;
+			}
+			return false;
+
+		}
 		return false;
 	}
 	
@@ -124,13 +122,13 @@ public class Library
   // Print Information (printInfo()) about all podcasts in the array list
 	public void listAllPodcasts()
 	{
-		// for (int i = 0; i < podcasts.size(); i++)
-		// {
-		// 	int index = i + 1;
-		// 	System.out.print("" + index + ". ");
-		// 	podcasts.get(i).printInfo();
-		// 	System.out.println();	
-		// }
+		for (int i = 0; i < podcasts.size(); i++)
+		{
+			int index = i + 1;
+			System.out.print("" + index + ". ");
+			podcasts.get(i).printInfo();
+			System.out.println();	
+		}
 	}
 	
   	// Print the name of all playlists in the playlists array list
@@ -213,10 +211,6 @@ public class Library
 			}
 			return 0;			
 		}
-		// public boolean compareYear(Song s1, Song s2)
-		// {
-		// 	return s1.getYear() < s2.getYear();
-		// }
 	}
 
 	// Sort songs by length
@@ -282,13 +276,47 @@ public class Library
 	// Bonus
 	public boolean playPodcast(int index, int season, int episode)
 	{
-		return false;
+		if (index < 1 || index > podcasts.size())
+		{
+			errorMsg = "Podcast Not Found";
+			return false;
+		}
+		Podcast currPod = podcasts.get(index-1);
+		if (season < 1 || season > currPod.getNumSeasons())
+		{
+			errorMsg = "Podcast Season Not Found";
+			return false;
+		}
+		Season currSeason = currPod.getSeasons().get(season-1);
+		if (episode < 1 || episode > currSeason.getEpisodeTitles().size())
+		{
+			errorMsg = "Podcast Episode Not Found";
+			return false;
+		}
+		podcasts.get(index-1).play(season, episode);
+		return true;
 	}
 	
 	// Print the episode titles of a specified season
 	// Bonus 
 	public boolean printPodcastEpisodes(int index, int season)
 	{
+		
+		if (index < 1 || index > podcasts.size())
+		{
+			errorMsg = "Podcast Not Found";
+			return false;
+		}
+		
+		Podcast currPod = podcasts.get(index-1);
+		if (season < 1 || season > currPod.getNumSeasons())
+		{
+			errorMsg = "Podcast Season Not Found";
+			return false;
+		}
+		podcasts.get(index-1).getSeasons().get(season-1).printTOC();
+
+
 		return false;
 	}
 	
@@ -317,7 +345,7 @@ public class Library
 		}
 		
 		audiobooks.get(index-1).printTOC();
-		return false;
+		return true;
 	}
 	
   /*
@@ -356,9 +384,6 @@ public class Library
 	// Play all content in a playlist
 	public boolean playPlaylist(String playlistTitle)
 	{
-
-		System.out.print(playlistTitle);
-
 		for (int i = 0; i < playlists.size(); i++)
 		{
 			if (playlists.get(i).getTitle().equals(playlistTitle))
@@ -416,14 +441,6 @@ public class Library
 			return true;
 		}
 
-		// if (type.equals(Song.TYPENAME)) {
-		// 	System.out.println("check song type passed");
-
-		// 	Song s = songs.get(index);
-		// 	playlists.get(plIndex).addContent(s);
-		// 	return true;
-		// }
-
 		if (type.equalsIgnoreCase("AUDIOBOOK"))
 		{
 			AudioBook au = audiobooks.get(index-1);
@@ -431,12 +448,12 @@ public class Library
 			return true;
 		}
 
-		// if (type.equals(Podcast.TYPENAME))
-		// {
-		// 	Podcast pod = podcasts.get(index);
-		// 	playlists.get(plIndex).addContent(pod);
-		// 	return true;
-		// }
+		if (type.equalsIgnoreCase("PODCAST"))
+		{
+			Podcast pod = podcasts.get(index-1);
+			playlists.get(plIndex).addContent(pod);
+			return true;
+		}
 
 		return false;
 
@@ -472,10 +489,10 @@ public class Library
 	{
 		return audiobooks.size();
 	}
-	// public int numPods()
-	// {
-	// 	return podcasts.size();
-	// }
+	public int numPods()
+	{
+		return podcasts.size();
+	}
 	
 }
 

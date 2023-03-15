@@ -64,8 +64,8 @@ public class AudioBook extends AudioContent
 		for (int i = 0; i < chapterTitles.size(); i++) 
 		{
 
-			int bookNum = i+1;
-			System.out.println("Chapter " + bookNum + ". " + chapterTitles.get(i));
+			int chNum = i+1;
+			System.out.println("Chapter " + chNum + ". " + chapterTitles.get(i));
 			
 			if (i == chapterTitles.size()-1) { break;}
 			System.out.println("");
@@ -94,9 +94,6 @@ public class AudioBook extends AudioContent
 		boolean lg = this.getLength() == audbk.getLength();	
 		boolean auth = this.getAuthor().equals(audbk.getAuthor());
 		boolean narr = this.getNarrator().equals(audbk.getNarrator());
-		// boolean chpT = this.getChapterTitles().equals(audbk.getChapterTitles());
-		// boolean chps = this.getChapters().equals(audbk.getChapters());
-
 
 		if (tt && yr && id && tp && af && lg && auth && narr) {return true;}
 		return false;

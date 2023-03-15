@@ -82,9 +82,15 @@ public class AudioContentStore
 					"James Clavel", "Ralph Lister", makeSHChapterTitles(), makeSHChapters());
 			contents.add(book);
 
+			
 			// Create a podcast object if you are doing the bonus see the makeSeasons() method below
 			// It is currently commented out. It makes use of a class Season you may want to also create
 			// or change it to something else
+
+			Podcast podcast = new Podcast("The Secret Life of Canada", 2021, "865", Podcast.TYPENAME, "", 1236, 
+					"Leah-Simone Bowen, Falen Johnson", makeSeasons());
+			contents.add(podcast);
+
 					
 		}
 		
@@ -187,43 +193,50 @@ public class AudioContentStore
 		}
 		
 		// Podcast Seasons
-		/*
+		
 		private ArrayList<Season> makeSeasons()
 		{
 			ArrayList<Season> seasons = new ArrayList<Season>();
+
 		  Season s1 = new Season();
-		  s1.episodeTitles.add("Bay Blanket");
-		  s1.episodeTitles.add("You Don't Want to Sleep Here");
-		  s1.episodeTitles.add("The Gold Rush");
-		  s1.episodeFiles.add("The Bay Blanket. These warm blankets are as iconic as Mariah Carey's \r\n"
+		  s1.addEpisodeTitle("Bay Blanket");
+
+		  s1.addEpisodeTitle("You Don't Want to Sleep Here");
+		  s1.addEpisodeTitle("The Gold Rush");
+
+		  s1.addEpisodeFile("The Bay Blanket. These warm blankets are as iconic as Mariah Carey's \r\n"
 		  		+ "lip-syncing, but some people believe they were used to spread\r\n"
 		  		+ " smallpox and decimate entire Indigenous communities. \r\n"
 		  		+ "We dive into the history of The Hudson's Bay Company and unpack the\r\n"
 		  		+ " very complicated story of the iconic striped blanket.");
-		  s1.episodeFiles.add("There is no doubt that the Klondike Gold Rush was an iconic event. \r\n"
+		  s1.addEpisodeFile("There is no doubt that the Klondike Gold Rush was an iconic event. \r\n"
 		  		+ "But what did the mining industry cost the original people of the territory? \r\n"
 		  		+ "And what was left when all the gold was gone? And what is a sour toe cocktail?");
-		  s1.episodeFiles.add("here is no doubt that the Klondike Gold Rush was an iconic event. \r\n"
+		  s1.addEpisodeFile("here is no doubt that the Klondike Gold Rush was an iconic event. \r\n"
 		  		+ "But what did the mining industry cost the original people of the territory? \r\n"
 		  		+ "And what was left when all the gold was gone? And what is a sour toe cocktail?");
-		  s1.episodeLengths.add(31);
-		  s1.episodeLengths.add(32);
-		  s1.episodeLengths.add(45);
+
+		  s1.addEpisodeLength(31);
+		  s1.addEpisodeLength(32);
+		  s1.addEpisodeLength(45);
 		  seasons.add(s1);
+
 		  Season s2 = new Season();
-		  s2.episodeTitles.add("Toronto vs Everyone");
-		  s2.episodeTitles.add("Water");
-		  s2.episodeFiles.add("There is no doubt that the Klondike Gold Rush was an iconic event. \r\n"
+		  s2.addEpisodeTitle("Toronto vs Everyone");
+		  s2.addEpisodeTitle("Water");
+
+		  s2.addEpisodeFile("There is no doubt that the Klondike Gold Rush was an iconic event. \r\n"
 		  		+ "But what did the mining industry cost the original people of the territory? \r\n"
 		  		+ "And what was left when all the gold was gone? And what is a sour toe cocktail?");
-		  s2.episodeFiles.add("Can the foundation of Canada be traced back to Indigenous trade routes?\r\n"
+		  s2.addEpisodeFile("Can the foundation of Canada be traced back to Indigenous trade routes?\r\n"
 		  		+ " In this episode Falen and Leah take a trip across the Great Lakes, they talk corn\r\n"
 		  		+ " and vampires, and discuss some big concerns currently facing Canada's water."); 
-		  s2.episodeLengths.add(45);
-		  s2.episodeLengths.add(50);
+
+		  s2.addEpisodeLength(45);
+		  s2.addEpisodeLength(50);
 		 
 		  seasons.add(s2);
 		  return seasons;
 		}
-		*/
+		
 }
