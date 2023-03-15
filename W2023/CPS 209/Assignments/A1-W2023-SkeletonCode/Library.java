@@ -172,6 +172,11 @@ public class Library
 	// also go through all playlists and remove it from any playlist as well if it is part of the playlist
 	public boolean deleteSong(int index)
 	{
+		if (index < 1 || index > songs.size())
+		{
+			errorMsg = "Song Not Found";
+			return false;
+		}
 		Song songToDel = songs.get(index-1);
 		songs.remove(index-1);
 
@@ -184,7 +189,9 @@ public class Library
 					playlists.get(i).getContent().remove(songToDel);
 				}
 			}
+			return true;
 		}
+		errorMsg = "Playlist Empty";
 		return false;
 	}
 	
@@ -382,7 +389,7 @@ public class Library
 				return true;
 			}
 		}
-
+		errorMsg = "Playlist Not Found";
 		return false;
 	}
 	
@@ -409,14 +416,19 @@ public class Library
 		{
 			if (playlists.get(i).getTitle().equals(playlistTitle))
 			{
+				if (indexInPl < 1 || indexInPl > playlists.size() )
+				{
+					errorMsg = "Audio Content Not Found";
+					return false;
+				}
 				System.out.println(playlistTitle);
-				if (indexInPl < 1 || playlists.size() )
 				playlists.get(i).play(indexInPl-1);
 				return true;
 			}
 		}
-
-		return false;	}
+		errorMsg = "Playlist Not Found";
+		return false;	
+	}
 	
 	// Add a song/audiobook/podcast from library lists at top to a playlist
 	// Use the type parameter and compare to Song.TYPENAME etc
@@ -447,8 +459,14 @@ public class Library
 				errorMsg = "Song Not Found";
 				return false;
 			}
-
 			Song s = songs.get(index-1);
+			
+			// if (playlists.get(plIndex).playlistContainsContent(s))
+			// {
+			// 	errorMsg = "Song Already In Playlist";
+			// 	return false;
+			// }
+
 			playlists.get(plIndex).addContent(s);
 			return true;
 		}
@@ -462,6 +480,13 @@ public class Library
 			}
 
 			AudioBook au = audiobooks.get(index-1);
+
+			// if (playlists.get(plIndex).playlistContainsContent(au))
+			// {
+			// 	errorMsg = "Audiobook Already In Playlist";
+			// 	return false;
+			// }
+
 			playlists.get(plIndex).addContent(au);
 			return true;
 		}
@@ -475,6 +500,13 @@ public class Library
 			}
 
 			Podcast pod = podcasts.get(index-1);
+
+			// if (playlists.get(plIndex).playlistContainsContent(pod))
+			// {
+			// 	errorMsg = "Podcast Already In Playlist";
+			// 	return false;
+			// }
+
 			playlists.get(plIndex).addContent(pod);
 			return true;
 		}
@@ -499,9 +531,11 @@ public class Library
 					playlists.get(i).deleteContent(index);
 					return true;
 				}
+				errorMsg = "Content Not Found";
 				return false;
 			}
 		}
+		errorMsg = "Playlist Not Found";
 		return false;
 		
 	}

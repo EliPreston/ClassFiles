@@ -394,6 +394,5 @@ public class MyAudioUI
 
 			System.out.print("\n>");
 		}
-		scanner.close();
 	}
 }
