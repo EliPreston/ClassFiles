@@ -100,46 +100,5 @@ public class Playlist
 		if (!contains(index)) return;
 		contents.remove(index-1);
 	}
-
-	// public boolean playlistContainsContent(AudioContent content)
-	// {
-	// 	ArrayList<AudioContent> pl = this.getContent();
-	// 	AudioContent obj = content;
-
-	// 	String objType = obj.getType();
-
-	// 	if (objType.equalsIgnoreCase("SONG"))
-	// 	{ obj = (Song) content; }
-
-	// 	if (objType.equalsIgnoreCase("AUDIOBOOK"))
-	// 	{ obj = (AudioBook) content; }
-
-	// 	if (objType.equalsIgnoreCase("PODCAST"))
-	// 	{ obj = (Podcast) content; }
-
-	// 	for (int i = 0; i < getContent().size(); i++)
-	// 	{
-	// 		if (objType.equalsIgnoreCase("SONG"))
-	// 		{
-	// 			if (pl.get(i).equals(obj))
-	// 			{
-	// 			return true;
-	// 		}
-	// 		}
-
-	// 		if (objType.equalsIgnoreCase("AUDIOBOOK"))
-	// 		{ obj = (AudioBook) content; }
-
-	// 		if (objType.equalsIgnoreCase("PODCAST"))
-	// 		{ obj = (Podcast) content; }
-
-	// 		if (pl.get(i).equals(obj))
-	// 		{
-	// 			return true;
-	// 		}
-	// 	}
-	// 	return false;
-	// }
-	
 	
 }

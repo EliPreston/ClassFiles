@@ -459,14 +459,8 @@ public class Library
 				errorMsg = "Song Not Found";
 				return false;
 			}
-			Song s = songs.get(index-1);
-			
-			// if (playlists.get(plIndex).playlistContainsContent(s))
-			// {
-			// 	errorMsg = "Song Already In Playlist";
-			// 	return false;
-			// }
 
+			Song s = songs.get(index-1);
 			playlists.get(plIndex).addContent(s);
 			return true;
 		}
@@ -480,13 +474,6 @@ public class Library
 			}
 
 			AudioBook au = audiobooks.get(index-1);
-
-			// if (playlists.get(plIndex).playlistContainsContent(au))
-			// {
-			// 	errorMsg = "Audiobook Already In Playlist";
-			// 	return false;
-			// }
-
 			playlists.get(plIndex).addContent(au);
 			return true;
 		}
@@ -500,13 +487,6 @@ public class Library
 			}
 
 			Podcast pod = podcasts.get(index-1);
-
-			// if (playlists.get(plIndex).playlistContainsContent(pod))
-			// {
-			// 	errorMsg = "Podcast Already In Playlist";
-			// 	return false;
-			// }
-
 			playlists.get(plIndex).addContent(pod);
 			return true;
 		}

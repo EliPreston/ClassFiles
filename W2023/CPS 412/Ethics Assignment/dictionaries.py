@@ -110,7 +110,7 @@ def dictionariesAdd():
         "Agree": 0,
         "Neutral": 0,
         "Disagree": 0,
-        "Strongly disagree": 0
+        "Strongly Disagree": 0
     }
     dicts.append(useOfAIToolsSlowsLearning)
 

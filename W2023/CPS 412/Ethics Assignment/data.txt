@@ -1,14 +1,14 @@
-{'University': 17, 'College': 0, 'Trade School': 0, 'Other': 0, 'High school': 1}
+{'University': 17, 'College': 0, 'Trade School': 0, 'Other': 1}
 {'18-20': 18, '21-23': 0, '24-26': 0, '27-29': 0, '30+': 0}
 {'Undergraduate - 1st year': 16, 'Undergraduate - 2nd year': 0, 'Undergraduate - 3rd year': 0, 'Undergraduate - 4th year': 0, 'Diploma': 1, 'Bachelors Degree': 1, 'Masters Degree': 0, 'PhD': 0}
-{'Faculty of Arts': 1, 'Faculty of Engineering and Architectural Sciences': 0, 'Faculty of Sciences': 15, 'Faculty of Law': 0, 'Faculty of Community Services': 0, 'Faculty of Business': 0, 'Other': 0, 'High school': 1, 'Economics': 1}
+{'Faculty of Arts': 1, 'Faculty of Engineering and Architectural Sciences': 0, 'Faculty of Sciences': 15, 'Faculty of Law': 0, 'Faculty of Community Services': 0, 'Faculty of Business': 0, 'Other': 2}
 {'Yes': 10, 'No': 8}
 {'7+ hours': 0, '5-6 hours': 0, '3-4 hours': 0, '1-2 hours': 10, '0 hours': 8}
 {'Very useful': 3, 'Useful': 5, 'Decent/mildly useful': 2, 'Not very useful': 0, 'Completely useless': 0, 'Never used ChatGPT': 8}
-{'Research': 1, 'Writing help (essays, summarizing passages, etc.)': 0, 'Math problems': 0, 'Engineering problems': 0, 'Programming': 0, 'Idea generation/brainstorming': 1, 'Never used it': 8, 'Math problems, Idea generation/brainstorming': 1, 'Research, Writing help (essays, summarizing passages, etc.), Idea generation/brainstorming': 2, 'Research, Writing help (essays, summarizing passages, etc.), Programming': 1, 'Writing help (essays, summarizing passages, etc.), Math problems, Programming, Idea generation/brainstorming': 1, 'Research, Writing help (essays, summarizing passages, etc.), Programming, Idea generation/brainstorming': 1, 'Research, Writing help (essays, summarizing passages, etc.)': 1, 'Research, Idea generation/brainstorming': 1}
+{'Research': 7, 'Writing help (essays, summarizing passages, etc.)': 6, 'Math problems': 2, 'Engineering problems': 0, 'Programming': 3, 'Idea generation/brainstorming': 7, 'Never used it': 8}
 {'I have retained nearly all the information I have learned/used': 3, 'I remember some of the information I have learned/used': 6, 'I find it very difficult to remember the information without going back to ChatGPT or some other source': 1, 'Never used ChatGPT': 8}
 {'Strongly agree': 4, 'Agree': 5, 'Neutral': 6, 'Disagree': 1, 'Strongly disagree': 2}
-{'Assignments': 1, 'Homework': 4, 'Quizes': 0, 'Tests': 0, 'None of the above': 4, 'Assignments, Homework': 7, 'Assignments, Homework, Quizes': 2}
-{'Strongly agree': 0, 'Agree': 7, 'Neutral': 6, 'Disagree': 3, 'Strongly disagree': 0, 'Strongly Disagree': 2}
+{'Assignments': 10, 'Homework': 13, 'Quizes': 2, 'Tests': 0, 'None of the above': 4}
+{'Strongly agree': 0, 'Agree': 7, 'Neutral': 6, 'Disagree': 3, 'Strongly Disagree': 2}
 {'Strongly agree': 0, 'Agree': 8, 'Neutral': 5, 'Disagree': 1, 'Strongly disagree': 4}
 {'North America': 13, 'South America': 1, 'Europe': 3, 'Asia': 0, 'Africa': 1, 'Australia': 0}
