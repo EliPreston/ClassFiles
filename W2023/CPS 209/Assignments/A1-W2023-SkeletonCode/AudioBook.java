@@ -92,17 +92,6 @@ public class AudioBook extends AudioContent
 		}
 		return false;
 
-		// boolean tt = this.getTitle().equals(audbk.getTitle());
-		// boolean yr = this.getYear() == audbk.getYear();
-		// boolean id = this.getId().equals(audbk.getId());
-		// boolean tp = this.getType().equals(audbk.getType());
-		// boolean af = this.getAudioFile().equals(audbk.getAudioFile());
-		// boolean lg = this.getLength() == audbk.getLength();	
-		// boolean auth = this.getAuthor().equals(audbk.getAuthor());
-		// boolean narr = this.getNarrator().equals(audbk.getNarrator());
-
-		// if (tt && yr && id && tp && af && lg && auth && narr) {return true;}
-		// return false;
 	}
 	
 	public int getNumberOfChapters()

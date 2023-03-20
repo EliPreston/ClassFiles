@@ -271,7 +271,6 @@ public class MyAudioUI
 				}
 
 				boolean deletedLibrary = mylibrary.deleteSong(index);
-				// boolean deletedPlaylists = mylibrary.delContentFromPlaylist(index, title);
 				if (!deletedLibrary)
 				{
 					System.out.println(mylibrary.getErrorMessage());

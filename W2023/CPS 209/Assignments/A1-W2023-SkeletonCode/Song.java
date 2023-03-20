@@ -93,15 +93,6 @@ public class Song extends AudioContent // implement the Comparable interface
 		}
 		return false;
 
-		// boolean sE = super.equals(other);
-
-		// boolean af = this.getAudioFile().equals(s2.getAudioFile());
-		// boolean cm = this.getComposer().equals(s2.getComposer());
-		// boolean ar = this.getArtist().equals(s2.getArtist());
-
-	
-		// if (tt && yr && id && tp && af && lg && cm && ar) {return true;}
-		// return false;
 	}
 	
 	// Implement the Comparable interface 

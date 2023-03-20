@@ -55,15 +55,6 @@ public class Podcast extends AudioContent
         }
         return false;
 
-        // boolean tt = this.getTitle().equals(pod2.getTitle());
-		// boolean yr = this.getYear() == pod2.getYear();
-		// boolean id = this.getId().equals(pod2.getId());
-		// boolean tp = this.getType().equals(pod2.getType());
-        // boolean le = this.getLength() == pod2.getLength();
-        // boolean ho = this.getHost().equals(pod2.getHost());
-
-        // if (tt && yr && id && tp && le && ho) { return true; }
-        // return false;
     }
 
     public void printInfo()
