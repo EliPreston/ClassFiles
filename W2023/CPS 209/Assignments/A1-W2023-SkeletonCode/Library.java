@@ -153,9 +153,9 @@ public class Library
 		ArrayList<String> artists = new ArrayList<>();
 		for (int i = 0; i < this.songs.size(); i++)
 		{
-			if (!artists.contains(songs.get(i).getComposer()))
+			if (!artists.contains(songs.get(i).getArtist()))
 			{
-				artists.add(songs.get(i).getComposer());
+				artists.add(songs.get(i).getArtist());
 			}
 		}
 
