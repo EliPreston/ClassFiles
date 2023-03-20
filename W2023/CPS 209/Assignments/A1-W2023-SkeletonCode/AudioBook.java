@@ -44,7 +44,7 @@ public class AudioBook extends AudioContent
 	public void printInfo()
 	{
 		super.printInfo();
-		System.out.println("Author: " + author + " , Narrator: " + narrator);
+		System.out.println("Author: " + author + " Narrator: " + narrator);
 	}
 	
   // Play the audiobook by setting the audioFile to the current chapter title (from chapterTitles array list) 
@@ -67,7 +67,7 @@ public class AudioBook extends AudioContent
 			int chNum = i+1;
 			System.out.println("Chapter " + chNum + ". " + chapterTitles.get(i));
 			
-			if (i == chapterTitles.size()-1) { break;}
+			// if (i == chapterTitles.size()-1) { break;}
 			System.out.println("");
 
 		}
@@ -85,18 +85,24 @@ public class AudioBook extends AudioContent
 	//Two AudioBooks are equal if their AudioContent information is equal and both the author and narrators are equal
 	public boolean equals(Object other)
 	{
-		AudioBook audbk = (AudioBook) other;
-		boolean tt = this.getTitle().equals(audbk.getTitle());
-		boolean yr = this.getYear() == audbk.getYear();
-		boolean id = this.getId().equals(audbk.getId());
-		boolean tp = this.getType().equals(audbk.getType());
-		boolean af = this.getAudioFile().equals(audbk.getAudioFile());
-		boolean lg = this.getLength() == audbk.getLength();	
-		boolean auth = this.getAuthor().equals(audbk.getAuthor());
-		boolean narr = this.getNarrator().equals(audbk.getNarrator());
-
-		if (tt && yr && id && tp && af && lg && auth && narr) {return true;}
+		AudioBook a2 = (AudioBook) other;
+		if (super.equals(other) && getAudioFile().equals(a2.getAudioFile()) && getAuthor().equals(a2.getAuthor()) && getNarrator().equals(a2.getNarrator()))
+		{
+			return true;
+		}
 		return false;
+
+		// boolean tt = this.getTitle().equals(audbk.getTitle());
+		// boolean yr = this.getYear() == audbk.getYear();
+		// boolean id = this.getId().equals(audbk.getId());
+		// boolean tp = this.getType().equals(audbk.getType());
+		// boolean af = this.getAudioFile().equals(audbk.getAudioFile());
+		// boolean lg = this.getLength() == audbk.getLength();	
+		// boolean auth = this.getAuthor().equals(audbk.getAuthor());
+		// boolean narr = this.getNarrator().equals(audbk.getNarrator());
+
+		// if (tt && yr && id && tp && af && lg && auth && narr) {return true;}
+		// return false;
 	}
 	
 	public int getNumberOfChapters()

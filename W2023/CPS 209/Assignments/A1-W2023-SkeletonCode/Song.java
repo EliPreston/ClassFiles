@@ -35,7 +35,7 @@ public class Song extends AudioContent // implement the Comparable interface
 	public void printInfo()
 	{
 		super.printInfo();
-		System.out.println("Artist: " + artist + " , Composer: " + composer + " , Genre: " + genre);
+		System.out.println("Artist: " + artist + " Composer: " + composer + " Genre: " + genre);
 	}
 	
 	// Play the song by setting the audioFile to the lyrics string and then calling the play() method of the superclass
@@ -87,17 +87,21 @@ public class Song extends AudioContent // implement the Comparable interface
 	public boolean equals(Object other)
 	{
 		Song s2 = (Song) other;
-		boolean tt = this.getTitle().equals(s2.getTitle());
-		boolean yr = this.getYear() == s2.getYear();
-		boolean id = this.getId().equals(s2.getId());
-		boolean tp = this.getType().equals(s2.getType());
-		boolean af = this.getAudioFile().equals(s2.getAudioFile());
-		boolean lg = this.getLength() == s2.getLength();
-		boolean cm = this.getComposer().equals(s2.getComposer());
-		boolean ar = this.getArtist().equals(s2.getArtist());
-	
-		if (tt && yr && id && tp && af && lg && cm && ar) {return true;}
+		if (super.equals(other) && this.artist.equals(s2.artist) && this.composer.equals(s2.composer))
+		{
+			return true;
+		}
 		return false;
+
+		// boolean sE = super.equals(other);
+
+		// boolean af = this.getAudioFile().equals(s2.getAudioFile());
+		// boolean cm = this.getComposer().equals(s2.getComposer());
+		// boolean ar = this.getArtist().equals(s2.getArtist());
+
+	
+		// if (tt && yr && id && tp && af && lg && cm && ar) {return true;}
+		// return false;
 	}
 	
 	// Implement the Comparable interface 

@@ -49,15 +49,21 @@ public class Podcast extends AudioContent
     public boolean podEquals(Object other)
     {
         Podcast pod2 = (Podcast) other;
-        boolean tt = this.getTitle().equals(pod2.getTitle());
-		boolean yr = this.getYear() == pod2.getYear();
-		boolean id = this.getId().equals(pod2.getId());
-		boolean tp = this.getType().equals(pod2.getType());
-        boolean le = this.getLength() == pod2.getLength();
-        boolean ho = this.getHost().equals(pod2.getHost());
-
-        if (tt && yr && id && tp && le && ho) { return true; }
+        if (super.equals(other) && this.getTitle().equals(pod2.getTitle()) && this.getHost().equals(pod2.getHost()))
+        {
+            return true;
+        }
         return false;
+
+        // boolean tt = this.getTitle().equals(pod2.getTitle());
+		// boolean yr = this.getYear() == pod2.getYear();
+		// boolean id = this.getId().equals(pod2.getId());
+		// boolean tp = this.getType().equals(pod2.getType());
+        // boolean le = this.getLength() == pod2.getLength();
+        // boolean ho = this.getHost().equals(pod2.getHost());
+
+        // if (tt && yr && id && tp && le && ho) { return true; }
+        // return false;
     }
 
     public void printInfo()
@@ -70,15 +76,19 @@ public class Podcast extends AudioContent
     {
         String epFile = this.getSeasons().get(0).getEpisodeFiles().get(0);
         // setAudioFile("Season 1: " + epTitle + "\n" + epFile);
-        setAudioFile("Season 1:\n" + epFile);
+        String epTitle =  this.getSeasons().get(0).getEpisodeTitles().get(0);
+        // setAudioFile(epTitle + "\n" + epFile);
+        
+        setAudioFile(epFile);
+        System.out.println(epTitle);
         super.play();
 
-        // setAudioFile(seasons.);
     }
 
     public void play(int season, int episode)
     {
         setAudioFile(this.getSeasons().get(season-1).getEpisodeFiles().get(episode-1));
+        System.out.println(this.getSeasons().get(season-1).getEpisodeTitles().get(episode-1));
         super.play();
 
         // setAudioFile(seasons.);

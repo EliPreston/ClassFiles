@@ -46,7 +46,7 @@ public class Library
 			Song s = (Song) content;
 			if (songs.contains(s)) 
 			{
-				errorMsg = "Song already downloaded.";
+				errorMsg = "Song already downloaded";
 				return false;
 			}
 			else if (!songs.contains(s))
@@ -63,7 +63,7 @@ public class Library
 
 			if (audiobooks.contains(ab)) 
 			{
-				errorMsg = "Audiobook already downloaded.";
+				errorMsg = "Audiobook already downloaded";
 				return false;
 			}
 			else if (!audiobooks.contains(ab))
@@ -80,7 +80,7 @@ public class Library
 			Podcast p = (Podcast) content;
 			if (podcasts.contains(p)) 
 			{
-				errorMsg = "Podcast already downloaded.";
+				errorMsg = "Podcast already downloaded";
 				return false;
 			}
 			else if (!podcasts.contains(p))
@@ -178,17 +178,18 @@ public class Library
 			return false;
 		}
 		Song songToDel = songs.get(index-1);
-		songs.remove(index-1);
 
 		if (playlists.size() > 0) 
 		{
 			for (int i = 0; i < playlists.size(); i++)
 			{
-				if (playlists.get(i).getContent().contains(songToDel))
+				if (this.playlists.get(i).getContent().contains(songToDel))
 				{
-					playlists.get(i).getContent().remove(songToDel);
+					this.playlists.get(i).getContent().remove(songToDel);
 				}
+				
 			}
+			songs.remove(index-1);
 			return true;
 		}
 		errorMsg = "Playlist Empty";
@@ -371,7 +372,7 @@ public class Library
 		Playlist np = new Playlist(title);
 		if (playlists.contains(np))
 		{
-			errorMsg = "Playlist with that title already exists.";
+			errorMsg = "Playlist with that title already exists";
 			return false;
 		}
 		playlists.add(np);
@@ -411,13 +412,18 @@ public class Library
 	// Play a specific song/audiobook in a playlist
 	public boolean playPlaylist(String playlistTitle, int indexInPl)
 	{
+		System.out.println(playlistTitle);
+		System.out.println(indexInPl);
 
 		for (int i = 0; i < playlists.size(); i++)
 		{
 			if (playlists.get(i).getTitle().equals(playlistTitle))
 			{
+				System.out.print("title accepted");
 				if (indexInPl < 1 || indexInPl > playlists.size() )
 				{
+					System.out.print("indexInPl false flag here");
+
 					errorMsg = "Audio Content Not Found";
 					return false;
 				}

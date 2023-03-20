@@ -243,7 +243,7 @@ public class MyAudioUI
 				{
 					title = scanner.nextLine();
 
-					System.out.print("Playlist Audiocontent #: "); 
+					System.out.print("Content Number: "); 
 					if (scanner.hasNextInt())
 					{
 						index = scanner.nextInt();
