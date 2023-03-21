@@ -19,6 +19,7 @@ public class Season {
         this.episodeLengths = new ArrayList<Integer>();
     }
 
+    // Create Season object and initialize with an arraylists of episode titles, episode audio files, and episode lengths
     public Season(ArrayList<String> episodeTitles, ArrayList<String> episodeFiles, ArrayList<Integer> episodeLengths)
     {
         setEpisodeTitles(episodeTitles);
@@ -30,6 +31,7 @@ public class Season {
         this.episodeLengths = getEpisodeLengths();
     }
 
+    // Next six methods are simple getter/setter methods for a Season object
     public ArrayList<String> getEpisodeFiles()
     {
         return episodeFiles;
@@ -60,21 +62,25 @@ public class Season {
         this.episodeLengths = episodeLengths;
     }    
     
+    // Add episode title (string) to episodeTitles arraylist
     public void addEpisodeTitle(String episodeTitle)
     {
         episodeTitles.add(episodeTitle);
     }
 
+    // Add episode audio file (string) to episodeFiles arraylist
     public void addEpisodeFile(String episodeFile)
     {
         episodeFiles.add(episodeFile);
     }
 
+    // Add episode length (int) to episodeLengths arraylist
     public void addEpisodeLength(int episodeLength)
     {
         episodeLengths.add(episodeLength);
     }
 
+    // Print table of contents (episodes) for a podcast season.
     public void printTOC()
     {
         for (int i = 0; i < episodeTitles.size(); i++)
@@ -82,7 +88,7 @@ public class Season {
             int epNum = i+1;
             System.out.println("Episode " + epNum + ". " + episodeTitles.get(i));
 			
-			if (i == episodeTitles.size()-1) { break;}
+			// if (i == episodeTitles.size()-1) { break;}
 			System.out.println("");
         }
     }

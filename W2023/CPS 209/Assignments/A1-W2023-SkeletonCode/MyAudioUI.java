@@ -1,6 +1,6 @@
-// import java.util.ArrayList;
-// import java.util.Collections;
-// import java.util.StringTokenizer;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.StringTokenizer;
 import java.util.Scanner;
 
 
@@ -92,6 +92,7 @@ public class MyAudioUI
 					scanner.nextLine();
 				}
 
+				// Check if the song encounterd an error
 				boolean played = mylibrary.playSong(index);
 				if (!played)
 				{
@@ -113,6 +114,7 @@ public class MyAudioUI
 					scanner.nextLine();
 				}
 				
+				// Check for error(s)
 				boolean listed = mylibrary.printAudioBookTOC(index);
 				if (!listed)
 				{
@@ -127,6 +129,8 @@ public class MyAudioUI
 			{
 				int index = 0;
 				int chapter = 0;
+
+				// Check twice for keyboard input (ie. 2 scanner.next lines)
 				System.out.print("Audio Book Number: ");
 				if (scanner.hasNextInt())
 				{
@@ -140,6 +144,8 @@ public class MyAudioUI
 						scanner.nextLine();
 					}
 				}
+
+				// Check for error(s)
 				boolean played = mylibrary.playAudioBook(index, chapter);
 				if (!played)
 				{
@@ -154,6 +160,8 @@ public class MyAudioUI
 			{
 				int index = 0;
 				int season = 0;
+
+				// Check twice for keyboard input (ie. 2 scanner.next lines)
 				System.out.print("Podcast Number: ");
 				if (scanner.hasNextInt())
 				{
@@ -168,6 +176,7 @@ public class MyAudioUI
 					}
 				}
 				
+				// Check for error(s)
 				boolean listed = mylibrary.printPodcastEpisodes(index, season);
 				if (!listed)
 				{
@@ -184,6 +193,8 @@ public class MyAudioUI
 				int index = 0;
 				int season = 0;
 				int episode = 0;
+
+				// Check three times for keyboard input (ie. 3 scanner.next lines)
 				System.out.print("Podcast Number: ");
 				if (scanner.hasNextInt())
 				{
@@ -205,6 +216,7 @@ public class MyAudioUI
 					}
 				}
 
+				// Check for error(s)
 				boolean playedPodcast = mylibrary.playPodcast(index, season, episode);
 				if (!playedPodcast)
 				{
@@ -223,6 +235,7 @@ public class MyAudioUI
 					title = scanner.nextLine();
 				}
 
+				// Check for error(s)
 				boolean playedPlaylist = mylibrary.playPlaylist(title);
 				if (!playedPlaylist)
 				{
@@ -251,6 +264,7 @@ public class MyAudioUI
 					}
 				}
 
+				// Check for error(s)
 				boolean playedFromPl = mylibrary.playPlaylist(title, index);
 				if (!playedFromPl)
 				{
@@ -270,6 +284,7 @@ public class MyAudioUI
 					scanner.nextLine();
 				}
 
+				// Check for error(s)
 				boolean deletedLibrary = mylibrary.deleteSong(index);
 				if (!deletedLibrary)
 				{
@@ -288,18 +303,18 @@ public class MyAudioUI
 				{
 					title = scanner.nextLine();
 				}
+
+				// Check for error(s)
 				boolean validPL = mylibrary.makePlaylist(title);
 				if (!validPL)
 				{
 					System.out.println(mylibrary.getErrorMessage());
 				}
-
-
 				
 			}
 			// Print the content information (songs, audiobooks, podcasts) in the playlist
 			// Read a playlist title string from the keyboard
-		  // see class Library for the method to call
+		  	// see class Library for the method to call
 			else if (action.equalsIgnoreCase("PRINTPL"))	// print playlist content
 			{
 				String title = "";
@@ -309,6 +324,7 @@ public class MyAudioUI
 					title = scanner.nextLine();
 				}
 
+				// Check for error(s)
 				boolean validPL = mylibrary.printPlaylist(title);
 				if (!validPL)
 				{
@@ -319,7 +335,7 @@ public class MyAudioUI
 			// Add content (song, audiobook, podcast) from mylibrary (via index) to a playlist
 			// Read the playlist title, the type of content ("song" "audiobook" "podcast")
 			// and the index of the content (based on song list, audiobook list etc) from the keyboard
-		  // see class Library for the method to call
+		  	// see class Library for the method to call
 			else if (action.equalsIgnoreCase("ADDTOPL")) 
 			{
 				String title = "";
@@ -335,6 +351,7 @@ public class MyAudioUI
 					if (scanner.hasNext())
 					{
 						contentType = scanner.nextLine();
+
 						System.out.print("Library Content: ");
 						if (scanner.hasNextInt())
 						{
@@ -344,6 +361,7 @@ public class MyAudioUI
 					}
 				}
 
+				// Check for error(s)
 				boolean added = mylibrary.addContentToPlaylist(contentType, libraryContentNum, title);
 				if (!added)
 				{
@@ -352,7 +370,7 @@ public class MyAudioUI
 			}
 			// Delete content from play list based on index from the playlist
 			// Read the playlist title string and the playlist index
-		  // see class Library for the method to call
+		 	// see class Library for the method to call
 			else if (action.equalsIgnoreCase("DELFROMPL")) 
 			{
 				int index = 0;
@@ -371,6 +389,7 @@ public class MyAudioUI
 					}
 				}
 
+				// Check for error(s)
 				boolean delFromPl = mylibrary.delContentFromPlaylist(index, title);
 				if (!delFromPl)
 				{

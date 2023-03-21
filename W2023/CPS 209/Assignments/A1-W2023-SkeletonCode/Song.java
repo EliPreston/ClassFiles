@@ -1,7 +1,7 @@
 /*
  * A Song is a type of AudioContent. A Song has extra fields such as Artist (person(s) singing the song) and composer 
  */
-public class Song extends AudioContent // implement the Comparable interface
+public class Song extends AudioContent implements Comparable<Song> // implement the Comparable interface
 {
 	public static final String TYPENAME =	"SONG";
 	
@@ -98,9 +98,11 @@ public class Song extends AudioContent // implement the Comparable interface
 	// Implement the Comparable interface 
 	// Compare two songs based on their title
 	// This method will allow songs to be sorted alphabetically
+	@Override
 	public int compareTo(Song other)
 	{
 		return this.getTitle().compareTo(other.getTitle());
 		
 	}
+
 }

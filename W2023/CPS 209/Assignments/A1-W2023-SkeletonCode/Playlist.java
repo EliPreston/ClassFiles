@@ -54,12 +54,14 @@ public class Playlist
 		{
 			int index = i+1;
 			System.out.print(index + ". ");
+
 			audConts.get(i).printInfo();
 			System.out.println("");
 		}
 	}
 
 	// Play all the AudioContent in the contents list
+	// Loops through contents arraylist and prints the contents at each index
 	public void playAll()
 	{
 		for (int i = 0; i < this.contents.size(); i++)
@@ -89,7 +91,6 @@ public class Playlist
 		return false;
 
 	}
-
 	
 	// Given an index of an audio content object in contents array list,
 	// remove the audio content object from the array list

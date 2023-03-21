@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
+import java.util.Comparator; 
 
 /*
  * This class manages, stores, and plays audio content such as songs, podcasts and audiobooks. 
@@ -159,6 +159,7 @@ public class Library
 			}
 		}
 
+		// Print artists names from the arraylist created above
 		for (int i = 0; i < artists.size(); i++)
 		{
 			int index = i + 1;
@@ -177,8 +178,10 @@ public class Library
 			errorMsg = "Song Not Found";
 			return false;
 		}
+		// Get the song we are trying to delete
 		Song songToDel = songs.get(index-1);
 
+		// Loop through playlists, check if it contains the song, if so, delete it from the playlist
 		if (playlists.size() > 0) 
 		{
 			for (int i = 0; i < playlists.size(); i++)
@@ -192,11 +195,12 @@ public class Library
 			songs.remove(index-1);
 			return true;
 		}
+
 		errorMsg = "Playlist Empty";
 		return false;
 	}
 	
-  //Sort songs in library by year
+  	//Sort songs in library by year
 	public void sortSongsByYear()
 	{
 		// Use Collections.sort()
@@ -210,14 +214,9 @@ public class Library
 	{
 		public int compare(Song s1, Song s2)
 		{
-			if (s1.getYear() > s2.getYear())
-			{
-				return 1;
-			} else if (s1.getYear() < s2.getYear())
-			{
-				return -1;
-			}
-			return 0;			
+			if (s1.getYear() > s2.getYear()) { return 1; } 
+			else if (s1.getYear() < s2.getYear()) { return -1; }
+			return 0;
 		}
 	}
 
@@ -234,13 +233,8 @@ public class Library
 	{
 		public int compare(Song s1, Song s2)
 		{
-			if (s1.getLength() > s2.getLength())
-			{
-				return 1;
-			} else if (s1.getLength() < s2.getLength())
-			{
-				return -1;
-			}
+			if (s1.getLength() > s2.getLength()) { return 1; } 
+			else if (s1.getLength() < s2.getLength()) { return -1; }
 			return 0;			
 		}
 	}
@@ -251,17 +245,8 @@ public class Library
 		// Use Collections.sort()
 		// class Song should implement the Comparable interface
 		// see class Song code
-		Collections.sort(songs, new SongTitleComparator());
+		Collections.sort(songs);
 	}
-
-	private class SongTitleComparator implements Comparator<Song>
-	{
-		public int compare(Song s1, Song s2)
-		{
-			return s1.compareTo(s2);
-		}
-	}
-
 	
 	
 	/*
@@ -415,18 +400,17 @@ public class Library
 		System.out.println(playlistTitle);
 		System.out.println(indexInPl);
 
+		if (indexInPl < 1 || indexInPl > playlists.size() )
+		{
+			errorMsg = "Audio Content Not Found";
+			return false;
+		}
+
 		for (int i = 0; i < playlists.size(); i++)
 		{
 			if (playlists.get(i).getTitle().equals(playlistTitle))
 			{
-				System.out.print("title accepted");
-				if (indexInPl < 1 || indexInPl > playlists.size() )
-				{
-					System.out.print("indexInPl false flag here");
-
-					errorMsg = "Audio Content Not Found";
-					return false;
-				}
+				
 				System.out.println(playlistTitle);
 				playlists.get(i).play(indexInPl-1);
 				return true;
@@ -452,6 +436,8 @@ public class Library
 					break;
 				}
 		}
+		
+		// check if index is invalid, ie. the playlist title was not found in the arraylist playlists
 		if (plIndex == -1)
 		{
 			errorMsg = "Playlist Not Found";
@@ -526,19 +512,16 @@ public class Library
 		
 	}
 
-	public int numSongs()
+	// Was writing this same code throughout this file, so decided to make a method
+	// to check if the given index was valid in the given arrayList
+	public boolean validIndex(int index, ArrayList objectList)
 	{
-		return songs.size();
+		if (index < 1 || index > objectList.size())
+		{
+			return false;
+		}
+		return true;
 	}
-	public int numAudbks()
-	{
-		return audiobooks.size();
-	}
-	public int numPods()
-	{
-		return podcasts.size();
-	}
-	
 }
 
 

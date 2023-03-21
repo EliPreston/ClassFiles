@@ -12,14 +12,10 @@
             // a list of episode lengths (in minutes). 
 // See the video of an example of podcast content. 
 
-// Provide the ability to 
-//      play a specific episode of a season. 
-
-// You may want to create a class Season to hold the episode information 
-// for a season. 
-
-// Add code to MyAudioUI.java for actions PODCASTS, PLAYPOD.
-// Add methods to class Library
+/*
+ * A Podcast is a type of AudioContent. A podcast has extra fields such as host (person(s) hosting the podasct)
+ * and seasons with a number of episodes. 
+ */
 
 import java.util.ArrayList;
 
@@ -27,7 +23,7 @@ public class Podcast extends AudioContent
 {
     public static final String TYPENAME = "PODCAST";
 
-    private String host;
+    private String host;                    // Can be multiple names seperated by commas
     private ArrayList<Season> seasons;
 
     public Podcast(String title, int year, String id, String type, String audioFile, int length,
@@ -57,12 +53,15 @@ public class Podcast extends AudioContent
 
     }
 
+    // Prints info about podcast, uses superclass printInfo
     public void printInfo()
 	{
 		super.printInfo();
 		System.out.println("Host: " + host + "\nSeasons: " + seasons.size());
 	}
 
+    // To play a podcast with no given season or episode, the audiofile and title are set to the first episode
+    // from the first season, then the superclass play() method is called.
     public void play()
     {
         String epFile = this.getSeasons().get(0).getEpisodeFiles().get(0);
@@ -76,6 +75,8 @@ public class Podcast extends AudioContent
 
     }
 
+    // To play a podcast given a specified season and episode sets the audiofile to the given episode 
+    // from the given season before calling the superclass play() method.
     public void play(int season, int episode)
     {
         setAudioFile(this.getSeasons().get(season-1).getEpisodeFiles().get(episode-1));
@@ -85,6 +86,7 @@ public class Podcast extends AudioContent
         // setAudioFile(seasons.);
     }
 
+    // Simple setter/getter methods for podcast attributes
     public void setHost(String host)
     {
         this.host = host;
