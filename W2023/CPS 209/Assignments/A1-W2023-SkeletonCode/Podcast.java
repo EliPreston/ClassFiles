@@ -1,3 +1,5 @@
+// Eli Preston -- 501152959
+
 // Podcast: Design a class which is also a subclass of 
 // AudioContent that contains extra information. 
 
@@ -38,11 +40,7 @@ public class Podcast extends AudioContent
 
     }
 
-    public String getType()
-	{
-		return TYPENAME;
-	}
-
+    // Check if 2 podcast objects are equal, makes use of superclass
     public boolean podEquals(Object other)
     {
         Podcast pod2 = (Podcast) other;
@@ -88,6 +86,11 @@ public class Podcast extends AudioContent
     }
 
     // Accessor and mutator methods for podcast attributes
+    public String getType()
+	{
+		return TYPENAME;
+	}
+
     public void setHost(String host)
     {
         this.host = host;
