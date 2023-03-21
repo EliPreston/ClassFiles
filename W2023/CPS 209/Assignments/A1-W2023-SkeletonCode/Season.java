@@ -14,6 +14,12 @@ public class Season {
     private ArrayList<String> episodeFiles;
     private ArrayList<Integer> episodeLengths;
 
+    public Season()
+    {
+        this.episodeTitles =    new ArrayList<String>();
+        this.episodeFiles =     new ArrayList<String>();
+        this.episodeLengths =   new ArrayList<Integer>();
+    }
 
     // Create Season object and initialize with an arraylists of episode titles, episode audio files, and episode lengths
     public Season(ArrayList<String> episodeTitles, ArrayList<String> episodeFiles, ArrayList<Integer> episodeLengths)
