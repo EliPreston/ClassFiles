@@ -399,20 +399,20 @@ public class Library
 	// Play a specific song/audiobook in a playlist
 	public boolean playPlaylist(String playlistTitle, int indexInPl)
 	{
-		System.out.println(playlistTitle);
-		System.out.println(indexInPl);
-
-		if (indexInPl < 1 || indexInPl > playlists.size() )
-		{
-			errorMsg = "Audio Content Not Found";
-			return false;
-		}
-
+		// Loop through playlists
 		for (int i = 0; i < playlists.size(); i++)
 		{
+			// Check if titles of current playlist and playlist being searched for
 			if (playlists.get(i).getTitle().equals(playlistTitle))
 			{
-				
+				// Check if valid index of playlist
+				if (indexInPl < 1 || indexInPl > playlists.get(i).getContent().size())
+				{
+					errorMsg = "Audio Content Not Found";
+					return false;
+				}
+
+				// If valid, play method is executed.
 				System.out.println(playlistTitle);
 				playlists.get(i).play(indexInPl-1);
 				return true;

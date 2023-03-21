@@ -64,12 +64,9 @@ public class Podcast extends AudioContent
     public void play()
     {
         String epFile = this.getSeasons().get(0).getEpisodeFiles().get(0);
-        // setAudioFile("Season 1: " + epTitle + "\n" + epFile);
-        String epTitle =  this.getSeasons().get(0).getEpisodeTitles().get(0);
-        // setAudioFile(epTitle + "\n" + epFile);
+        String epTitle = this.getSeasons().get(0).getEpisodeTitles().get(0);
         
-        setAudioFile(epFile);
-        System.out.println(epTitle);
+        setAudioFile(epTitle + epFile);
         super.play();
 
     }
@@ -78,8 +75,7 @@ public class Podcast extends AudioContent
     // from the given season before calling the superclass play() method.
     public void play(int season, int episode)
     {
-        setAudioFile(this.getSeasons().get(season-1).getEpisodeFiles().get(episode-1));
-        System.out.println(this.getSeasons().get(season-1).getEpisodeTitles().get(episode-1));
+        setAudioFile(this.getSeasons().get(season-1).getEpisodeTitles().get(episode-1) + "\n" + this.getSeasons().get(season-1).getEpisodeFiles().get(episode-1));
         super.play();
 
         // setAudioFile(seasons.);
