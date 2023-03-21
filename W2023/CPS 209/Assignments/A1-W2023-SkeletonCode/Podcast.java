@@ -26,6 +26,7 @@ public class Podcast extends AudioContent
     private String host;                    // Can be multiple names seperated by commas
     private ArrayList<Season> seasons;
 
+    // Initialize podcast object with superclass, and then initializes host and seasons attributes
     public Podcast(String title, int year, String id, String type, String audioFile, int length,
                     String host, ArrayList<Season> seasons)
     {
@@ -86,7 +87,7 @@ public class Podcast extends AudioContent
         // setAudioFile(seasons.);
     }
 
-    // Simple setter/getter methods for podcast attributes
+    // Accessor and mutator methods for podcast attributes
     public void setHost(String host)
     {
         this.host = host;

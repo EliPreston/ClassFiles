@@ -14,6 +14,7 @@ public class Playlist
 		contents = new ArrayList<AudioContent>();
 	}
 	
+	// Accessor/mutator methods
 	public String getTitle()
 	{
 		return title;

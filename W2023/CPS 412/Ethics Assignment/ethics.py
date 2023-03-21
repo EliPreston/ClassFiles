@@ -40,10 +40,11 @@ for column in df:
                 if (i == 7) or (i == 10):
                     for key in list(curr.keys()):
                         if key in ans:
-                            print(f"{key} answer is in the given answer")
+                            # print(f"{key} answer is in the given answer")
                             curr[key] += 1
                         else:
-                            print(f"{key} not in ans")
+                            # print(f"{key} not in ans")
+                            continue
                 else:
                     otherKey = "Other"
                     curr["Other"] += 1

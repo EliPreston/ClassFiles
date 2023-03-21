@@ -45,6 +45,7 @@ public class Song extends AudioContent implements Comparable<Song> // implement 
 		super.play();
 	}
 	
+	// Next eight methods are accessor and mutator (setter/getter) methods
 	public String getComposer()
 	{
 		return composer;

@@ -31,7 +31,7 @@ public class Season {
         this.episodeLengths = getEpisodeLengths();
     }
 
-    // Next six methods are simple getter/setter methods for a Season object
+    // Next six methods are accessor and mutator (setter/getter) methods
     public ArrayList<String> getEpisodeFiles()
     {
         return episodeFiles;

@@ -94,6 +94,7 @@ public class AudioBook extends AudioContent
 
 	}
 	
+	// Accessor/mutator methods
 	public int getNumberOfChapters()
 	{
 		return chapters.size();

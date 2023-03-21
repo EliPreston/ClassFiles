@@ -55,6 +55,7 @@ abstract public class AudioContent
 		return title.equals(otherCon.title) && id.equals(otherCon.id);
 	}
   
+	// Accessor/mutator methods
 	public String getAudioFile()
 	{
 		return this.audioFile;
