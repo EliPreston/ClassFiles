@@ -51,18 +51,42 @@ for column in df:
      
         print(curr)
         print("-----")
-        f.write(str(curr) + "\n")        
+        f.write(str(curr) + "\n")
 
         k = list(curr.keys())
         v = list(curr.values())
 
-        fig = plt.figure(figsize=(10, 5))
+
+
+
+
+        # fig = plt.figure(figsize=(5, 5))
+        fig = plt.figure()
+        fig.set_figwidth(10)
+        fig.set_figheight(7)
+        plt.subplots_adjust(bottom=0.25)
+
+        # plt.pie(v, autopct="%.2f")
+        # whole = plt.Circle((0,0), 0.65, facecolor='white')
+        # plt.gcf().gca().add_artist(whole)
+
+
+
+        # plt.legend(k, loc = 'lower left')
+        # plt.ylabel("")
+        
+
         plt.bar(k, v, color='maroon', width=0.2)
-        plt.xlabel("Answers")
+        plt.xticks(rotation=45, ha='right', wrap=True)
+
+        # plt.xlabel("Answers")
         plt.ylabel("# of people")
-        plt.title("Question: " + column)
+
+        plt.title(column, wrap=True)
         plt.show()
         
     i += 1
+
+
 
 
