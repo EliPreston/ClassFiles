@@ -133,8 +133,3 @@ def dictionariesAdd():
     }
     dicts.append(location)
 
-
-    # for i in dicts:
-    #     print(i)
-
-    # print(dicts)
