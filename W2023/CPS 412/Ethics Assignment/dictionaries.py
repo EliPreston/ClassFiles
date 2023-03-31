@@ -1,3 +1,8 @@
+# Creates dictionaries of all questions from our survey with the keys
+# being the possible answers that someone could put and the values
+# being a counter for how many people answered with that answer
+# Each dictionary is then appended to a list to be accessed sequentially
+
 dicts = []
 
 def dictionariesAdd():
