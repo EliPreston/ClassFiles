@@ -1,3 +1,7 @@
+# Eli Preston (501152959)
+# Wejd Jabour(501162622)
+# Beamlak Tareke (501203039)
+
 # The following imports pandas to read the data, matplotlib to graph the data and numpy which is used for the
 # graphing of data correctly
 import pandas as pd
@@ -107,7 +111,8 @@ legendLabels = [
         round((ugrd1[1] / nottotal * 100), 2)) + "%"),
     (k[1] + ' | Yes - ' + str(round((ugrd2[0] / yestotal * 100), 2)) + '%  | No - ' + str(
         round((ugrd2[1] / nottotal * 100), 2)) + "%"),
-    (k[2] + '  | Yes - ' + str(round((ugrd3[0] / yestotal * 100), 2)) + '%  | No - ' + str(
+    (k[2] + '  | Yes - '
+            '' + str(round((ugrd3[0] / yestotal * 100), 2)) + '%  | No - ' + str(
         round((ugrd3[1] / nottotal * 100), 2)) + "%"),
     (k[3] + '  | Yes - ' + str(round((ugrd4[0] / yestotal * 100), 2)) + '%    | No - ' + str(
         round((ugrd4[1] / nottotal * 100), 2)) + "%"),

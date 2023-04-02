@@ -1,3 +1,7 @@
+# Eli Preston (501152959)
+# Wejd Jabour(501162622)
+# Beamlak Tareke (501203039)
+
 # Creates dictionaries of all questions from our survey with the keys
 # being the possible answers that someone could put and the values
 # being a counter for how many people answered with that answer

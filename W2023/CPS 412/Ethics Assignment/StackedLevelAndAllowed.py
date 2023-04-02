@@ -1,3 +1,7 @@
+# Eli Preston (501152959)
+# Wejd Jabour(501162622)
+# Beamlak Tareke (501203039)
+
 # The following imports pandas to read the data, matplotlib to graph the data and numpy which is used for the
 # graphing of data correctly
 import pandas as pd

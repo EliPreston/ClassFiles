@@ -1,3 +1,7 @@
+# Eli Preston (501152959)
+# Wejd Jabour(501162622)
+# Beamlak Tareke (501203039)
+
 # The following imports pandas to read the data, matplotlib to graph the data and dictionaries which is a class that
 # holds dictionaries for all the questions that were asked in the survey
 import pandas as pd
