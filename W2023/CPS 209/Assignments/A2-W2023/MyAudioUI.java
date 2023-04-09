@@ -1,8 +1,6 @@
 // Eli Preston -- 501152959
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.StringTokenizer;
+
 import java.util.Scanner;
 
 
@@ -63,23 +61,33 @@ public class MyAudioUI
 			// Specify the index of the content
 			else if (action.equalsIgnoreCase("DOWNLOAD")) 
 			{
-				int index = 0;
+
+				// *************************************************************************
+				// Modify the download action so that it takes two store indices instead of 
+				// one store index as parameters – i.e. a fromIndex and a toIndex. That is, you 
+				// should now be able to download a range of songs/books etc. from the store (e.g. 
+				// from song 2 to song 6, inclusive). If some of the songs are already in the library,
+				//  then and error message for each of these songs should be printed (see the video)
+				// *************************************************************************
+
+
+				// int index = 0;
 				
-				System.out.print("Store Content #: ");
-				if (scanner.hasNextInt())
-				{
-					index = scanner.nextInt();
-					scanner.nextLine(); // "consume" nl character (necessary when mixing nextLine() and nextInt())
-				}
-				AudioContent content = store.getContent(index);
-				if (content == null)
-				{
-					System.out.println("Content Not Found in Store");
-				}
-				else if (!mylibrary.download(content))
-				{
-					System.out.println(mylibrary.getErrorMessage());
-				}
+				// System.out.print("Store Content #: ");
+				// if (scanner.hasNextInt())
+				// {
+				// 	index = scanner.nextInt();
+				// 	scanner.nextLine(); // "consume" nl character (necessary when mixing nextLine() and nextInt())
+				// }
+				// AudioContent content = store.getContent(index);
+				// if (content == null)
+				// {
+				// 	System.out.println("Content Not Found in Store");
+				// }
+				// else if (!mylibrary.download(content))
+				// {
+				// 	System.out.println(mylibrary.getErrorMessage());
+				// }
 						
 			}
 			// Get the *library* index (index of a song based on the songs list)

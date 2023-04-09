@@ -516,7 +516,7 @@ public class Library
 
 	// Was writing this same code throughout this file, so decided to make a method
 	// to check if the given index was valid in the given arrayList
-	public boolean validIndex(int index, ArrayList objectList)
+	public boolean validIndex(int index, ArrayList<Object> objectList)
 	{
 		if (index < 1 || index > objectList.size())
 		{
