@@ -3,6 +3,9 @@
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator; 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 /*
  * This class manages, stores, and plays audio content such as songs, podcasts and audiobooks. 
@@ -24,12 +27,42 @@ public class Library
 		return errorMsg;
 	}
 
-	public Library()
+	public Library() throws FileNotFoundException
 	{
 		songs 		= new ArrayList<Song>(); 
-		audiobooks 	= new ArrayList<AudioBook>(); ;
+		audiobooks 	= new ArrayList<AudioBook>();
 		playlists   = new ArrayList<Playlist>();
-	  	podcasts	= new ArrayList<Podcast>(); ;
+	  	podcasts	= new ArrayList<Podcast>();
+
+		File storeFile = new File("store.txt");
+		Scanner storeScanner = new Scanner(storeFile);
+
+		// This file has a specific fixed format for each audio content.
+
+		// A song has the following format: 
+			// The first line is the keyword SONG. 
+			// The 2 nd – 8 th lines contain the strings id, title, year, length, artist, composer, genre. 
+			// The 9 th line contains the number of lines of lyrics. 
+			// Then the actual lyrics lines follow. 
+		// An audio book has the following format: 
+			// The first line is the keyword AUDIOBOOK. 
+			// The 2 nd – 7 th lines contain the strings id, title, year, length, author, narrator. 
+			// The 8 th line contains the number of chapters.
+			// This is followed by the chapter titles. 
+			// After the chapter titles is a line containing the number of lines of a chapter, followed by the chapter lines.
+			// This is repeated for each chapter. 
+			 
+		// See the posted store.txt to help you understand the format above. The Podcast class is not included in assignment 2.
+		
+		while (storeScanner.hasNextLine()) {
+			String type = storeScanner.nextLine();
+			String int = storeScanner.nextLine();
+			String type = storeScanner.nextLine();
+			String type = storeScanner.nextLine();
+			String type = storeScanner.nextLine();
+
+		}
+
 	}
 	/*
 	 * Download audio content from the store. Since we have decided (design decision) to keep 3 separate lists in our library

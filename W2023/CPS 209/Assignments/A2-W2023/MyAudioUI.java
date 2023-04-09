@@ -57,39 +57,6 @@ public class MyAudioUI
 			{
 				mylibrary.listAllPlaylists(); 
 			}
-			// Download audiocontent (song/audiobook/podcast) from the store 
-			// Specify the index of the content
-			else if (action.equalsIgnoreCase("DOWNLOAD")) 
-			{
-
-				// *************************************************************************
-				// Modify the download action so that it takes two store indices instead of 
-				// one store index as parameters – i.e. a fromIndex and a toIndex. That is, you 
-				// should now be able to download a range of songs/books etc. from the store (e.g. 
-				// from song 2 to song 6, inclusive). If some of the songs are already in the library,
-				//  then and error message for each of these songs should be printed (see the video)
-				// *************************************************************************
-
-
-				// int index = 0;
-				
-				// System.out.print("Store Content #: ");
-				// if (scanner.hasNextInt())
-				// {
-				// 	index = scanner.nextInt();
-				// 	scanner.nextLine(); // "consume" nl character (necessary when mixing nextLine() and nextInt())
-				// }
-				// AudioContent content = store.getContent(index);
-				// if (content == null)
-				// {
-				// 	System.out.println("Content Not Found in Store");
-				// }
-				// else if (!mylibrary.download(content))
-				// {
-				// 	System.out.println(mylibrary.getErrorMessage());
-				// }
-						
-			}
 			// Get the *library* index (index of a song based on the songs list)
 			// of a song from the keyboard and play the song 
 			else if (action.equalsIgnoreCase("PLAYSONG")) 
@@ -406,7 +373,7 @@ public class MyAudioUI
 					System.out.println(mylibrary.getErrorMessage());
 				}
 			}
-			
+			// Sorting actions
 			else if (action.equalsIgnoreCase("SORTBYYEAR")) // sort songs by year
 			{
 				mylibrary.sortSongsByYear();
@@ -418,6 +385,66 @@ public class MyAudioUI
 			else if (action.equalsIgnoreCase("SORTBYLENGTH")) // sort songs by length
 			{
 				mylibrary.sortSongsByLength();
+			}
+
+
+			// *************************************************************************
+			// *************************************************************************
+			// *************************************************************************
+			// New feautres
+			// *************************************************************************
+			// *************************************************************************
+			// *************************************************************************
+			else if (action.equalsIgnoreCase("SEARCH")) // sort songs by length
+			{
+
+			}
+			else if (action.equalsIgnoreCase("SEARCHA")) // sort songs by length
+			{
+				
+			}
+			else if (action.equalsIgnoreCase("SEARCHG")) // sort songs by length
+			{
+				
+			}
+			else if (action.equalsIgnoreCase("DOWNLOAD")) 
+			{
+
+				// *************************************************************************
+				// Modify the download action so that it takes two store indices instead of 
+				// one store index as parameters – i.e. a fromIndex and a toIndex. That is, you 
+				// should now be able to download a range of songs/books etc. from the store (e.g. 
+				// from song 2 to song 6, inclusive). If some of the songs are already in the library,
+				//  then and error message for each of these songs should be printed (see the video)
+				// *************************************************************************
+
+
+				// int index = 0;
+				
+				// System.out.print("Store Content #: ");
+				// if (scanner.hasNextInt())
+				// {
+				// 	index = scanner.nextInt();
+				// 	scanner.nextLine(); // "consume" nl character (necessary when mixing nextLine() and nextInt())
+				// }
+				// AudioContent content = store.getContent(index);
+				// if (content == null)
+				// {
+				// 	System.out.println("Content Not Found in Store");
+				// }
+				// else if (!mylibrary.download(content))
+				// {
+				// 	System.out.println(mylibrary.getErrorMessage());
+				// }
+						
+			}
+			else if (action.equalsIgnoreCase("DOWNLOADA")) // sort songs by length
+			{
+				
+			}
+			else if (action.equalsIgnoreCase("DOWNLOADG")) // sort songs by length
+			{
+				
 			}
 
 			System.out.print("\n>");
