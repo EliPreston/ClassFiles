@@ -3,19 +3,15 @@
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator; 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
 
 /*
- * This class manages, stores, and plays audio content such as songs, podcasts and audiobooks. 
+ * This class manages, stores, and plays audio content such as songs and audiobooks. 
  */
 public class Library
 {
 	private ArrayList<Song> 		songs; 
 	private ArrayList<AudioBook> 	audiobooks;
 	private ArrayList<Playlist> 	playlists; 
-  	private ArrayList<Podcast> 		podcasts;
 	
 	// Public methods in this class set errorMesg string 
 	// Error Messages can be retrieved from main in class MyAudioUI by calling  getErrorMessage()
@@ -27,50 +23,20 @@ public class Library
 		return errorMsg;
 	}
 
-	public Library() throws FileNotFoundException
+	public Library()
 	{
 		songs 		= new ArrayList<Song>(); 
 		audiobooks 	= new ArrayList<AudioBook>();
 		playlists   = new ArrayList<Playlist>();
-	  	podcasts	= new ArrayList<Podcast>();
-
-		File storeFile = new File("store.txt");
-		Scanner storeScanner = new Scanner(storeFile);
-
-		// This file has a specific fixed format for each audio content.
-
-		// A song has the following format: 
-			// The first line is the keyword SONG. 
-			// The 2 nd – 8 th lines contain the strings id, title, year, length, artist, composer, genre. 
-			// The 9 th line contains the number of lines of lyrics. 
-			// Then the actual lyrics lines follow. 
-		// An audio book has the following format: 
-			// The first line is the keyword AUDIOBOOK. 
-			// The 2 nd – 7 th lines contain the strings id, title, year, length, author, narrator. 
-			// The 8 th line contains the number of chapters.
-			// This is followed by the chapter titles. 
-			// After the chapter titles is a line containing the number of lines of a chapter, followed by the chapter lines.
-			// This is repeated for each chapter. 
-			 
-		// See the posted store.txt to help you understand the format above. The Podcast class is not included in assignment 2.
 		
-		while (storeScanner.hasNextLine()) {
-			String type = storeScanner.nextLine();
-			String int = storeScanner.nextLine();
-			String type = storeScanner.nextLine();
-			String type = storeScanner.nextLine();
-			String type = storeScanner.nextLine();
-
-		}
-
 	}
 	/*
 	 * Download audio content from the store. Since we have decided (design decision) to keep 3 separate lists in our library
-	 * to store our songs, podcasts and audiobooks (we could have used one list) then we need to look at the type of
+	 * to store our songs and audiobooks (we could have used one list) then we need to look at the type of
 	 * audio content (hint: use the getType() method and compare to Song.TYPENAME or AudioBook.TYPENAME etc)
 	 * to determine which list it belongs to above
 	 * 
-	 * Make sure you do not add song/podcast/audiobook to a list if it is already there. Hint: use the equals() method
+	 * Make sure you do not add song/audiobook to a list if it is already there. Hint: use the equals() method
 	 * If it is already in a list, set the errorMsg string and return false. Otherwise add it to the list and return true
 	 * See the video
 	 */
@@ -110,22 +76,6 @@ public class Library
 			
 		} 
 
-		else if (content.getType().equals(Podcast.TYPENAME)) 
-		{
-			Podcast p = (Podcast) content;
-			if (podcasts.contains(p)) 
-			{
-				errorMsg = "Podcast already downloaded";
-				return false;
-			}
-			else if (!podcasts.contains(p))
-			{
-				podcasts.add(p);
-				return true;
-			}
-			return false;
-
-		}
 		return false;
 	}
 	
@@ -154,17 +104,6 @@ public class Library
 		
 	}
 	
-  // Print Information (printInfo()) about all podcasts in the array list
-	public void listAllPodcasts()
-	{
-		for (int i = 0; i < podcasts.size(); i++)
-		{
-			int index = i + 1;
-			System.out.print("" + index + ". ");
-			podcasts.get(i).printInfo();
-			System.out.println();	
-		}
-	}
 	
   	// Print the name of all playlists in the playlists array list
 	// First print the index number as in listAllSongs() above
@@ -300,51 +239,7 @@ public class Library
 		return true;
 	}
 	
-	// Play podcast from list (specify season and episode)
-	// Bonus
-	public boolean playPodcast(int index, int season, int episode)
-	{
-		if (index < 1 || index > podcasts.size())
-		{
-			errorMsg = "Podcast Not Found";
-			return false;
-		}
-		Podcast currPod = podcasts.get(index-1);
-		if (season < 1 || season > currPod.getNumSeasons())
-		{
-			errorMsg = "Podcast Season Not Found";
-			return false;
-		}
-		Season currSeason = currPod.getSeasons().get(season-1);
-		if (episode < 1 || episode > currSeason.getEpisodeTitles().size())
-		{
-			errorMsg = "Podcast Episode Not Found";
-			return false;
-		}
-		podcasts.get(index-1).play(season, episode);
-		return true;
-	}
 	
-	// Print the episode titles of a specified season
-	// Bonus 
-	public boolean printPodcastEpisodes(int index, int season)
-	{
-		
-		if (index < 1 || index > podcasts.size())
-		{
-			errorMsg = "Podcast Not Found";
-			return false;
-		}
-		
-		Podcast currPod = podcasts.get(index-1);
-		if (season < 1 || season > currPod.getNumSeasons())
-		{
-			errorMsg = "Podcast Season Not Found";
-			return false;
-		}
-		currPod.getSeasons().get(season-1).printTOC();
-		return true;
-	}
 	
 	// Play a chapter of an audio book from list of audiobooks
 	public boolean playAudioBook(int index, int chapter)
@@ -455,7 +350,7 @@ public class Library
 		return false;	
 	}
 	
-	// Add a song/audiobook/podcast from library lists at top to a playlist
+	// Add a song/audiobook from library lists at top to a playlist
 	// Use the type parameter and compare to Song.TYPENAME etc
 	// to determine which array list it comes from then use the given index
 	// for that list
@@ -505,27 +400,14 @@ public class Library
 			return true;
 		}
 
-		if (type.equalsIgnoreCase("PODCAST"))
-		{
-			if (index < 1 || index > podcasts.size())
-			{
-				errorMsg = "Podcast Not Found";
-				return false;
-			}
-
-			Podcast pod = podcasts.get(index-1);
-			playlists.get(plIndex).addContent(pod);
-			return true;
-		}
-
 		errorMsg = "Audio Content Type Not Found";
 		return false;
 
 	}
 
 	
-  // Delete a song/audiobook/podcast from a playlist with the given title
-	// Make sure the given index of the song/audiobook/podcast in the playlist is valid 
+  // Delete a song/audiobook from a playlist with the given title
+	// Make sure the given index of the song/audiobook in the playlist is valid 
 	public boolean delContentFromPlaylist(int index, String title)
 	{
 

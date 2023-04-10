@@ -185,10 +185,10 @@ Shogun
 James Clavel
 Ralph Lister
 4
- 
- 
- 
- 
+Prologue
+Chapter 1
+Chapter 2
+Chapter 3
 2
 The gale tore at him and he felt its bite deep within
 and he knew that if they did not make landfall in three days they would all be dead

@@ -3,7 +3,6 @@
 
 import java.util.Scanner;
 
-
 // Simulation of a Simple Text-based Music App (like Apple Music)
 
 public class MyAudioUI
@@ -44,10 +43,6 @@ public class MyAudioUI
 			else if (action.equalsIgnoreCase("BOOKS"))	// List all songs
 			{
 				mylibrary.listAllAudioBooks(); 
-			}
-			else if (action.equalsIgnoreCase("PODCASTS"))	// List all songs
-			{
-				mylibrary.listAllPodcasts(); 
 			}
 			else if (action.equalsIgnoreCase("ARTISTS"))	// List all songs
 			{
@@ -125,77 +120,6 @@ public class MyAudioUI
 				// Check for error(s)
 				boolean played = mylibrary.playAudioBook(index, chapter);
 				if (!played)
-				{
-					System.out.println(mylibrary.getErrorMessage());
-				}
-			}
-			// Print the episode titles for the given season of the given podcast
-			// In addition to the podcast index from the list of podcasts, 
-			// read the season number from the keyboard
-			// see class Library for the method to call
-			else if (action.equalsIgnoreCase("PODTOC")) 
-			{
-				int index = 0;
-				int season = 0;
-
-				// Check twice for keyboard input (ie. 2 scanner.next lines)
-				System.out.print("Podcast Number: ");
-				if (scanner.hasNextInt())
-				{
-					index = scanner.nextInt();
-					scanner.nextLine();
-
-					System.out.print("Season Number: ");
-					if (scanner.hasNextInt())
-					{
-						season = scanner.nextInt();
-						scanner.nextLine();
-					}
-				}
-				
-				// Check for error(s)
-				boolean listed = mylibrary.printPodcastEpisodes(index, season);
-				if (!listed)
-				{
-					System.out.println(mylibrary.getErrorMessage());
-				}
-				
-			}
-			// Similar to playsong above except for podcast
-			// In addition to the podcast index from the list of podcasts, 
-			// read the season number and the episode number from the keyboard
-			// see class Library for the method to call
-			else if (action.equalsIgnoreCase("PLAYPOD")) 
-			{
-				int index = 0;
-				int season = 0;
-				int episode = 0;
-
-				// Check three times for keyboard input (ie. 3 scanner.next lines)
-				System.out.print("Podcast Number: ");
-				if (scanner.hasNextInt())
-				{
-					index = scanner.nextInt();
-					scanner.nextLine();
-
-					System.out.print("Season Number: ");
-					if (scanner.hasNextInt())
-					{
-						season = scanner.nextInt();
-						scanner.nextLine();
-
-						System.out.print("Episode Number: ");
-						if (scanner.hasNextInt())
-						{
-							episode = scanner.nextInt();
-							scanner.nextLine();
-						}
-					}
-				}
-
-				// Check for error(s)
-				boolean playedPodcast = mylibrary.playPodcast(index, season, episode);
-				if (!playedPodcast)
 				{
 					System.out.println(mylibrary.getErrorMessage());
 				}
@@ -397,14 +321,36 @@ public class MyAudioUI
 			// *************************************************************************
 			else if (action.equalsIgnoreCase("SEARCH")) // sort songs by length
 			{
+				System.out.print("Title: ");
+				String title = "";
+				if (scanner.hasNext())
+				{
+					title = scanner.nextLine();
+				}
+				store.search(title);
+				
 
 			}
 			else if (action.equalsIgnoreCase("SEARCHA")) // sort songs by length
 			{
+				System.out.print("Artist: ");
+				String artist = "";
+				if (scanner.hasNext())
+				{
+					artist = scanner.nextLine();
+				}
+				store.searchA(artist);
 				
 			}
 			else if (action.equalsIgnoreCase("SEARCHG")) // sort songs by length
 			{
+				System.out.print("Genre: ");
+				String genre = "";
+				if (scanner.hasNext())
+				{
+					genre = scanner.nextLine();
+				}
+				store.searchG(genre);
 				
 			}
 			else if (action.equalsIgnoreCase("DOWNLOAD")) 
@@ -418,25 +364,29 @@ public class MyAudioUI
 				//  then and error message for each of these songs should be printed (see the video)
 				// *************************************************************************
 
-
-				// int index = 0;
+				int from = 0;
+				int to = 0;
 				
-				// System.out.print("Store Content #: ");
-				// if (scanner.hasNextInt())
-				// {
-				// 	index = scanner.nextInt();
-				// 	scanner.nextLine(); // "consume" nl character (necessary when mixing nextLine() and nextInt())
-				// }
-				// AudioContent content = store.getContent(index);
-				// if (content == null)
-				// {
-				// 	System.out.println("Content Not Found in Store");
-				// }
-				// else if (!mylibrary.download(content))
-				// {
-				// 	System.out.println(mylibrary.getErrorMessage());
-				// }
-						
+				System.out.print("From Store Content #: ");
+				if (scanner.hasNextInt())
+				{
+					from = scanner.nextInt();
+					scanner.nextLine(); // "consume" nl character (necessary when mixing nextLine() and nextInt())
+
+					System.out.print("To Store Content #: ");
+					if (scanner.hasNextInt())
+					{
+						to = scanner.nextInt();
+						scanner.nextLine(); // "consume" nl character (necessary when mixing nextLine() and nextInt())
+					}
+				}
+
+				for (int i = from; i < to+1; i++) {
+					AudioContent content = store.getContent(i);
+					mylibrary.download(content);
+					System.out.println(content.getType() + " " + content.getTitle() + " Added to Library");
+				}
+				
 			}
 			else if (action.equalsIgnoreCase("DOWNLOADA")) // sort songs by length
 			{
