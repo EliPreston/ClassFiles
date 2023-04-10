@@ -7,7 +7,6 @@ import java.util.Map;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.security.Identity;
 
 // Simulation of audio content in an online store
 // The songs, podcasts, audiobooks listed here can be "downloaded" to your library
@@ -228,5 +227,17 @@ public class AudioContentStore
 			}
 
 		}
+
+		
+		public Map<String, ArrayList<Integer>> getArtistsAuthors() 
+		{
+			return artistAuthorIndexes;
+		}
+
+		public Map<String, ArrayList<Integer>> getGenres() 
+		{
+			return genreIndexes;
+		}
+
 		
 }

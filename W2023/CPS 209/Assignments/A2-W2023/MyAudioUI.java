@@ -2,6 +2,7 @@
 
 
 import java.util.Scanner;
+import java.util.ArrayList;
 
 // Simulation of a Simple Text-based Music App (like Apple Music)
 
@@ -319,7 +320,7 @@ public class MyAudioUI
 			// *************************************************************************
 			// *************************************************************************
 			// *************************************************************************
-			else if (action.equalsIgnoreCase("SEARCH")) // sort songs by length
+			else if (action.equalsIgnoreCase("SEARCH")) 
 			{
 				System.out.print("Title: ");
 				String title = "";
@@ -331,7 +332,7 @@ public class MyAudioUI
 				
 
 			}
-			else if (action.equalsIgnoreCase("SEARCHA")) // sort songs by length
+			else if (action.equalsIgnoreCase("SEARCHA")) 
 			{
 				System.out.print("Artist: ");
 				String artist = "";
@@ -342,7 +343,7 @@ public class MyAudioUI
 				store.searchA(artist);
 				
 			}
-			else if (action.equalsIgnoreCase("SEARCHG")) // sort songs by length
+			else if (action.equalsIgnoreCase("SEARCHG")) 
 			{
 				System.out.print("Genre: ");
 				String genre = "";
@@ -388,13 +389,52 @@ public class MyAudioUI
 				}
 				
 			}
-			else if (action.equalsIgnoreCase("DOWNLOADA")) // sort songs by length
+			else if (action.equalsIgnoreCase("DOWNLOADA")) 
 			{
-				
+				System.out.print("Artist Name: ");
+				String artist = "";
+				if (scanner.hasNext())
+				{
+					artist = scanner.nextLine();
+				}
+
+				ArrayList<Integer> aIndexes = store.getArtistsAuthors().get(artist);
+				for (int i = 0; i < aIndexes.size(); i++) {
+					AudioContent content = store.getContent(aIndexes.get(i));
+					// try {
+						mylibrary.download(content);
+						System.out.println(content.getType() + " " + content.getTitle() + " Added to Library");
+					// } 
+					// catch(Exception e) {
+						// System.out.println(content.getType() + " " + content.getTitle() + " already downloaded");
+					// }
+				}
+
+
 			}
-			else if (action.equalsIgnoreCase("DOWNLOADG")) // sort songs by length
+			else if (action.equalsIgnoreCase("DOWNLOADG")) 
 			{
+				System.out.print("Genre: ");
+				String genre = "";
+				if (scanner.hasNext())
+				{
+					genre = scanner.nextLine().toUpperCase();
+				}
+
+				ArrayList<Integer> gIndexes = store.getGenres().get(genre);
+				for (int i = 0; i < gIndexes.size(); i++) {
+					
+					AudioContent content = store.getContent(gIndexes.get(i));
+					
+					// try {
+						mylibrary.download(content);
+						System.out.println(content.getType() + " " + content.getTitle() + " Added to Library");
+					// } 
+					// catch(Exception e) {
+						// System.out.println(content.getType() + " " + content.getTitle() + " already downloaded");
+					// }
 				
+				}
 			}
 
 			System.out.print("\n>");
