@@ -65,14 +65,13 @@ public class MyAudioUI
 					scanner.nextLine();
 				}
 
-				// Check if the song encounterd an error
-				boolean played = mylibrary.playSong(index);
-				if (!played)
-				{
-					System.out.println(mylibrary.getErrorMessage());
+				try {
+					mylibrary.playSong(index);
+				}
+				catch(Exception e) {
+					System.out.println(e.getMessage());
 				}
 
-				// Print error message if the song doesn't exist in the library
 			}
 			// Print the table of contents (TOC) of an audiobook that
 			// has been downloaded to the library. Get the desired book index
@@ -86,14 +85,14 @@ public class MyAudioUI
 					index = scanner.nextInt();
 					scanner.nextLine();
 				}
-				
-				// Check for error(s)
-				boolean listed = mylibrary.printAudioBookTOC(index);
-				if (!listed)
-				{
-					System.out.println(mylibrary.getErrorMessage());
+
+				try {
+					mylibrary.printAudioBookTOC(index);
 				}
-			// Print error message if the book doesn't exist in the library
+				catch(Exception e) {
+					System.out.println(e.getMessage());
+				}
+				
 			}
 			// Similar to playsong above except for audio book
 			// In addition to the book index, read the chapter 
@@ -118,12 +117,13 @@ public class MyAudioUI
 					}
 				}
 
-				// Check for error(s)
-				boolean played = mylibrary.playAudioBook(index, chapter);
-				if (!played)
-				{
-					System.out.println(mylibrary.getErrorMessage());
+				try {
+					mylibrary.playAudioBook(index, chapter);
 				}
+				catch(Exception e) {
+					System.out.println(e.getMessage());
+				}
+
 			}
 			// Specify a playlist title (string) 
 			// Play all the audio content (songs, audiobooks, podcasts) of the playlist 
@@ -137,12 +137,13 @@ public class MyAudioUI
 					title = scanner.nextLine();
 				}
 
-				// Check for error(s)
-				boolean playedPlaylist = mylibrary.playPlaylist(title);
-				if (!playedPlaylist)
-				{
-					System.out.println(mylibrary.getErrorMessage());
+				try {
+					mylibrary.playPlaylist(title);
 				}
+				catch(Exception e) {
+					System.out.println(e.getMessage());
+				}
+
 			}
 			// Specify a playlist title (string) 
 			// Read the index of a song/audiobook/podcast in the playist from the keyboard 
@@ -166,12 +167,14 @@ public class MyAudioUI
 					}
 				}
 
-				// Check for error(s)
-				boolean playedFromPl = mylibrary.playPlaylist(title, index);
-				if (!playedFromPl)
-				{
-					System.out.println(mylibrary.getErrorMessage());
+				
+				try {
+					mylibrary.playPlaylist(title, index);
 				}
+				catch(Exception e) {
+					System.out.println(e.getMessage());
+				}
+				
 			}
 			// Delete a song from the list of songs in mylibrary and any play lists it belongs to
 			// Read a song index from the keyboard
@@ -186,14 +189,13 @@ public class MyAudioUI
 					scanner.nextLine();
 				}
 
-				// Check for error(s)
-				boolean deletedLibrary = mylibrary.deleteSong(index);
-				if (!deletedLibrary)
-				{
-					System.out.println(mylibrary.getErrorMessage());
+				try {
+					mylibrary.deleteSong(index);
 				}
-
-					
+				catch(Exception e) {
+					System.out.println(e.getMessage());
+				}
+	
 			}
 			// Read a title string from the keyboard and make a playlist
 			// see class Library for the method to call
@@ -206,11 +208,11 @@ public class MyAudioUI
 					title = scanner.nextLine();
 				}
 
-				// Check for error(s)
-				boolean validPL = mylibrary.makePlaylist(title);
-				if (!validPL)
-				{
-					System.out.println(mylibrary.getErrorMessage());
+				try {
+					mylibrary.makePlaylist(title);
+				}
+				catch(Exception e) {
+					System.out.println(e.getMessage());
 				}
 				
 			}
@@ -226,12 +228,13 @@ public class MyAudioUI
 					title = scanner.nextLine();
 				}
 
-				// Check for error(s)
-				boolean validPL = mylibrary.printPlaylist(title);
-				if (!validPL)
-				{
-					System.out.println(mylibrary.getErrorMessage());
+				try {
+					mylibrary.printPlaylist(title);
 				}
+				catch(Exception e) {
+					System.out.println(e.getMessage());
+				}
+
 				
 			}
 			// Add content (song, audiobook, podcast) from mylibrary (via index) to a playlist
@@ -263,12 +266,13 @@ public class MyAudioUI
 					}
 				}
 
-				// Check for error(s)
-				boolean added = mylibrary.addContentToPlaylist(contentType, libraryContentNum, title);
-				if (!added)
-				{
-					System.out.println(mylibrary.getErrorMessage());
+				try {
+					mylibrary.addContentToPlaylist(contentType, libraryContentNum, title);
 				}
+				catch(Exception e) {
+					System.out.println(e.getMessage());
+				}
+
 			}
 			// Delete content from play list based on index from the playlist
 			// Read the playlist title string and the playlist index
@@ -291,12 +295,19 @@ public class MyAudioUI
 					}
 				}
 
-				// Check for error(s)
-				boolean delFromPl = mylibrary.delContentFromPlaylist(index, title);
-				if (!delFromPl)
-				{
-					System.out.println(mylibrary.getErrorMessage());
+				try {
+					mylibrary.delContentFromPlaylist(index, title);
 				}
+				catch(Exception e) {
+					System.out.println(e.getMessage());
+				}
+
+				// // Check for error(s)
+				// boolean delFromPl = mylibrary.delContentFromPlaylist(index, title);
+				// if (!delFromPl)
+				// {
+				// 	System.out.println(mylibrary.getErrorMessage());
+				// }
 			}
 			// Sorting actions
 			else if (action.equalsIgnoreCase("SORTBYYEAR")) // sort songs by year
@@ -328,7 +339,13 @@ public class MyAudioUI
 				{
 					title = scanner.nextLine();
 				}
-				store.search(title);
+
+				try {
+					store.search(title);
+				}
+				catch(Exception e) {
+					System.out.println("No matches for " + title);
+				}
 				
 
 			}
@@ -340,30 +357,50 @@ public class MyAudioUI
 				{
 					artist = scanner.nextLine();
 				}
-				store.searchA(artist);
+				try {
+					store.searchA(artist);
+				}
+				catch(Exception e) {
+					System.out.println("No matches for " + artist);
+				}
 				
 			}
 			else if (action.equalsIgnoreCase("SEARCHG")) 
 			{
-				System.out.print("Genre: ");
+				System.out.print("Genre [POP, ROCK, JAZZ, HIPHOP, RAP, , CLASSICAL]: ");
 				String genre = "";
 				if (scanner.hasNext())
 				{
-					genre = scanner.nextLine();
+					genre = scanner.nextLine().toUpperCase();
 				}
-				store.searchG(genre);
+
+				try {
+					store.searchG(genre);
+				}
+				catch(Exception e) {
+					System.out.println("No matches for " + genre);
+				}
 				
+			}
+			// BONUS
+			else if (action.equalsIgnoreCase("SEARCHP"))
+			{
+				System.out.print("Enter text to search for: ");
+				String lookFor = "";
+				if (scanner.hasNext())
+				{
+					lookFor = scanner.nextLine();
+				}
+				try {
+					store.searchP(lookFor);
+				}
+				catch(Exception e) {
+					System.out.println(e.getMessage());
+				}
+
 			}
 			else if (action.equalsIgnoreCase("DOWNLOAD")) 
 			{
-
-				// *************************************************************************
-				// Modify the download action so that it takes two store indices instead of 
-				// one store index as parameters – i.e. a fromIndex and a toIndex. That is, you 
-				// should now be able to download a range of songs/books etc. from the store (e.g. 
-				// from song 2 to song 6, inclusive). If some of the songs are already in the library,
-				//  then and error message for each of these songs should be printed (see the video)
-				// *************************************************************************
 
 				int from = 0;
 				int to = 0;
@@ -384,8 +421,12 @@ public class MyAudioUI
 
 				for (int i = from; i < to+1; i++) {
 					AudioContent content = store.getContent(i);
-					mylibrary.download(content);
-					System.out.println(content.getType() + " " + content.getTitle() + " Added to Library");
+
+					try {
+						mylibrary.download(content);
+					} catch(Exception e) {
+						System.out.println(e.getMessage());
+					}
 				}
 				
 			}
@@ -400,21 +441,20 @@ public class MyAudioUI
 
 				ArrayList<Integer> aIndexes = store.getArtistsAuthors().get(artist);
 				for (int i = 0; i < aIndexes.size(); i++) {
-					AudioContent content = store.getContent(aIndexes.get(i));
-					// try {
+					AudioContent content = store.getContent(aIndexes.get(i) + 1);
+					try {
 						mylibrary.download(content);
-						System.out.println(content.getType() + " " + content.getTitle() + " Added to Library");
-					// } 
-					// catch(Exception e) {
-						// System.out.println(content.getType() + " " + content.getTitle() + " already downloaded");
-					// }
+					} 
+					catch(Exception e) {
+						System.out.println(e.getMessage());
+					}
 				}
 
 
 			}
 			else if (action.equalsIgnoreCase("DOWNLOADG")) 
 			{
-				System.out.print("Genre: ");
+				System.out.print("Genre [POP, ROCK, JAZZ, HIPHOP, RAP, , CLASSICAL]: ");
 				String genre = "";
 				if (scanner.hasNext())
 				{
@@ -424,15 +464,14 @@ public class MyAudioUI
 				ArrayList<Integer> gIndexes = store.getGenres().get(genre);
 				for (int i = 0; i < gIndexes.size(); i++) {
 					
-					AudioContent content = store.getContent(gIndexes.get(i));
+					AudioContent content = store.getContent(gIndexes.get(i) + 1);
 					
-					// try {
+					try {
 						mylibrary.download(content);
-						System.out.println(content.getType() + " " + content.getTitle() + " Added to Library");
-					// } 
-					// catch(Exception e) {
-						// System.out.println(content.getType() + " " + content.getTitle() + " already downloaded");
-					// }
+					} 
+					catch(Exception e) {
+						System.out.println(e.getMessage());
+					}
 				
 				}
 			}

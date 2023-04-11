@@ -35,7 +35,6 @@ public class AudioContentStore
 						
 						String genreS = currSong.getGenre().toString();
 
-						// if (genreIndexes.keySet().contains(genreS)) {
 						if (genreIndexes.containsKey(genreS)) {
 							ArrayList<Integer> indexes = genreIndexes.get(genreS);
 							indexes.add(i);
@@ -47,7 +46,6 @@ public class AudioContentStore
 							genreIndexes.put(genreS, indexes);
 						}
 
-						// if (artistAuthorIndexes.keySet().contains(currSong.getArtist())) {
 						if (artistAuthorIndexes.containsKey(currSong.getArtist())) {
 							ArrayList<Integer> indexes = artistAuthorIndexes.get(currSong.getArtist());
 							indexes.add(i);
@@ -63,7 +61,6 @@ public class AudioContentStore
 					if (current.getType().equals(AudioBook.TYPENAME)) {
 						AudioBook currAudio = (AudioBook) current;
 
-						// if (artistAuthorIndexes.keySet().contains(currAudio.getAuthor())) {
 						if (artistAuthorIndexes.containsKey(currAudio.getAuthor())) {
 							ArrayList<Integer> indexes = artistAuthorIndexes.get(currAudio.getAuthor());
 							indexes.add(i);
@@ -161,7 +158,7 @@ public class AudioContentStore
 		}
 
 		// Convert genre string from file to Song.Genre so it can be used in the song constructor
-		public Song.Genre toGenre(String genre)
+		private Song.Genre toGenre(String genre)
 		{
 			if (genre.equalsIgnoreCase("POP")) 		{return Song.Genre.POP; }
 			if (genre.equalsIgnoreCase("ROCK")) 		{return Song.Genre.ROCK; }
@@ -171,6 +168,17 @@ public class AudioContentStore
 			if (genre.equalsIgnoreCase("CLASSICAL")) 	{return Song.Genre.CLASSICAL; }
 			return null;
 		}
+
+		
+		public Map<String, ArrayList<Integer>> getArtistsAuthors() 
+		{
+			return artistAuthorIndexes;
+		}
+
+		public Map<String, ArrayList<Integer>> getGenres() 
+		{
+			return genreIndexes;
+		}	
 		
 		public AudioContent getContent(int index)
 		{
@@ -183,8 +191,6 @@ public class AudioContentStore
 		
 		public void listAll()
 		{
-			System.out.println(contents);
-
 			for (int i = 0; i < contents.size(); i++)
 			{
 				int index = i + 1;
@@ -227,17 +233,57 @@ public class AudioContentStore
 			}
 
 		}
-
 		
-		public Map<String, ArrayList<Integer>> getArtistsAuthors() 
+		public void searchP(String forThisString)
 		{
-			return artistAuthorIndexes;
-		}
 
-		public Map<String, ArrayList<Integer>> getGenres() 
-		{
-			return genreIndexes;
-		}
+			int countCheck = 0;
+			for (int i = 0; i < contents.size(); i++)
+			{
+				try {
+					if (checkContent(contents.get(i), forThisString) == true) {
+						countCheck ++;
+						contents.get(i).printInfo();
+						System.out.println();
+					}
+				}
+				catch(Exception e) {
+					System.out.println(e.getMessage());
+				}
+			}
+			if (countCheck == 0) {System.out.println("No matches");}
 
+		}
 		
+		private boolean checkContent(AudioContent content, String substr)
+		{
+			substr = substr.toLowerCase();
+			if (content.getType().equals(Song.TYPENAME))
+			{
+				Song s = (Song) content;
+				if (s.getTitle().toLowerCase().contains(substr)) {return true;}
+				if (s.getArtist().toLowerCase().contains(substr)) {return true;}
+				if (s.getAudioFile().toLowerCase().contains(substr)) {return true;}
+				if (s.getLyrics().toLowerCase().contains(substr)) {return true;}
+				if (s.getComposer().toLowerCase().contains(substr)) {return true;}
+				
+				return false;
+			}
+
+			if (content.getType().equals(AudioBook.TYPENAME))
+			{
+				AudioBook a = (AudioBook) content;
+				if (a.getTitle().toLowerCase().contains(substr)) {return true;}
+				if (a.getAuthor().toLowerCase().contains(substr)) {return true;}
+
+				for (int i = 0; i < a.getChapterTitles().size(); i++) {
+					if (a.getChapterTitles().get(i).toLowerCase().contains(substr)) {return true;}
+					if (a.getChapters().get(i).toLowerCase().contains(substr)) {return true;}
+				}
+
+				return false;				
+			}
+			return false;
+			
+		}
 }
