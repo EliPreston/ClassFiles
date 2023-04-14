@@ -31,6 +31,15 @@ public class Library
 	 * If it is already in a list, set the errorMsg string and return false. Otherwise add it to the list and return true
 	 * See the video
 	 */
+
+	//  ****************************************************
+	// Found throughout this file is the line "throw new ...." which throws a 
+	// new custom exception which are written at the bottom of this file.
+	// When the program encounters something not right, it will throw a new exception
+	// pretaining to the issue and passes in a message which indicates what happened
+	// which can then be printed out useing the e.getMessage() method wherever the 
+	// exception is caught.
+	//  ****************************************************
 	public void download(AudioContent content)
 	{
 		if (content.getType().equals(Song.TYPENAME)) 
@@ -55,6 +64,7 @@ public class Library
 
 			if (audiobooks.contains(ab)) 
 			{
+				
 				throw new AudiobookAlreadyDownloadedException("AUDIOBOOK " + content.getTitle() + " Already Added to Library");
 				
 			}
@@ -393,8 +403,9 @@ public class Library
 }
 
 
-
-
+// These custom exception classes are used in the above code to tell the user when an error
+// has occured, and what the error is. This also prevents the program from crashing every
+// time something goes wrong.
 class SongAlreadyDownloadedException extends RuntimeException 
 {
 	public SongAlreadyDownloadedException() {}

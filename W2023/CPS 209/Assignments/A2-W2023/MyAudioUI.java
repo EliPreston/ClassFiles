@@ -331,6 +331,10 @@ public class MyAudioUI
 			// *************************************************************************
 			// *************************************************************************
 			// *************************************************************************
+
+			// Search method takes in a title string and calls the search function from 
+			// audiocontetnstore which is in a try block to catch any errors. If an 
+			// error occurs, the message in the catch bloick is printed out
 			else if (action.equalsIgnoreCase("SEARCH")) 
 			{
 				System.out.print("Title: ");
@@ -349,9 +353,13 @@ public class MyAudioUI
 				
 
 			}
+
+			// SearchA method gets the user to input an artist/Author's name
+			// This string is then passed into the searchA method from audiocontentstore
+			// which is again in a try-catch block to catch any errors
 			else if (action.equalsIgnoreCase("SEARCHA")) 
 			{
-				System.out.print("Artist: ");
+				System.out.print("Artist/Author: ");
 				String artist = "";
 				if (scanner.hasNext())
 				{
@@ -362,9 +370,14 @@ public class MyAudioUI
 				}
 				catch(Exception e) {
 					System.out.println("No matches for " + artist);
+					System.out.println("This method is case-sensitive, try again with capitalization.");
 				}
 				
 			}
+
+			// SearchG method gets the user to input a genre
+			// This string is then passed into the searchG method from audiocontentstore
+			// which is again in a try-catch block to catch any errors
 			else if (action.equalsIgnoreCase("SEARCHG")) 
 			{
 				System.out.print("Genre [POP, ROCK, JAZZ, HIPHOP, RAP, , CLASSICAL]: ");
@@ -382,7 +395,12 @@ public class MyAudioUI
 				}
 				
 			}
+
 			// BONUS
+			// SearchP method gets the user to input some string/substring which may
+			// be found in an audiocontent object
+			// This string is then passed into the searchP method from audiocontentstore
+			// which is again in a try-catch block to catch any errors
 			else if (action.equalsIgnoreCase("SEARCHP"))
 			{
 				System.out.print("Enter text to search for: ");
@@ -399,6 +417,12 @@ public class MyAudioUI
 				}
 
 			}
+
+			// the download method has changed from last assignment, it now gets the user to
+			// input 2 numbers, from and to, if from is less than to, then each song according to the
+			// from/to indexes is downloaded.
+			// If from is less than to, the download method isn't called
+			// The download method call is put inside a try block so as to catch any errors.
 			else if (action.equalsIgnoreCase("DOWNLOAD")) 
 			{
 
@@ -419,39 +443,61 @@ public class MyAudioUI
 					}
 				}
 
-				for (int i = from; i < to+1; i++) {
-					AudioContent content = store.getContent(i);
+				if (from > to) {
+					System.out.println("Invalid indexing; from value greater than to value.");
+				}
+				else {
+					for (int i = from; i < to+1; i++) {
+						AudioContent content = store.getContent(i);
 
-					try {
-						mylibrary.download(content);
-					} catch(Exception e) {
-						System.out.println(e.getMessage());
+						try {
+							mylibrary.download(content);
+						} catch(Exception e) {
+							System.out.println(e.getMessage());
+						}
 					}
+					
 				}
 				
 			}
+
+			// The downloadA method takes in an artist from the user, this string is then used to
+			// search the map containing the store indexes of all associates songs written by the artist
+			// and print those songs out with their associated index
 			else if (action.equalsIgnoreCase("DOWNLOADA")) 
 			{
-				System.out.print("Artist Name: ");
+				System.out.print("Artist/Author Name: ");
 				String artist = "";
 				if (scanner.hasNext())
 				{
 					artist = scanner.nextLine();
 				}
-
-				ArrayList<Integer> aIndexes = store.getArtistsAuthors().get(artist);
-				for (int i = 0; i < aIndexes.size(); i++) {
-					AudioContent content = store.getContent(aIndexes.get(i) + 1);
-					try {
-						mylibrary.download(content);
-					} 
-					catch(Exception e) {
-						System.out.println(e.getMessage());
+				try {
+					ArrayList<Integer> aIndexes = store.getArtistsAuthors().get(artist);
+				
+				
+					for (int i = 0; i < aIndexes.size(); i++) {
+						try {
+							AudioContent content = store.getContent(aIndexes.get(i) + 1);
+							mylibrary.download(content);
+						} 
+						catch(Exception e) {
+							System.out.println(e.getMessage());
+						}
 					}
+				}
+				catch(Exception e) {
+					System.out.println(e.getMessage());
+					System.out.println("This method is case-sensitive; the name must be exactly capitalized.");
+
 				}
 
 
 			}
+
+			// DownloadG method works the exact same way as downloadA, but the string is a genre
+			// and all the songs displayed would be from that specific genre if the user enters a 
+			// genre that appears in the store.
 			else if (action.equalsIgnoreCase("DOWNLOADG")) 
 			{
 				System.out.print("Genre [POP, ROCK, JAZZ, HIPHOP, RAP, , CLASSICAL]: ");

@@ -12,15 +12,29 @@ import java.io.IOException;
 // The songs, podcasts, audiobooks listed here can be "downloaded" to your library
 
 public class AudioContentStore
-{
+{		
 		private ArrayList<AudioContent> contents; 
+
+		// these maps are used for fast searches in the store for titles, artists/authors, and genre(s)
 		private Map<String, Integer> titleIndex = new HashMap<String, Integer>(); 
 		private Map<String, ArrayList<Integer>> artistAuthorIndexes = new HashMap<String, ArrayList<Integer>>(); 
 		private Map<String, ArrayList<Integer>> genreIndexes = new HashMap<String, ArrayList<Integer>>(); 
 		
 		public AudioContentStore()
 		{
-
+			// Using a try-catch structure so any exceptions are dealt with and the program does not crash
+			// Inside the try block, we call a method that reads the contents of a text file and creates 
+			// objects according to a certain pattern in how the lines are setup in the file and
+			// puts those objects into an arraylist titled "contents"
+			// Then we loop through the objects in the contents list, put the title immediately into a map
+			// with key being the title and the value being the index in the store.
+			// Then the type of the audio content is checked and based on that, either the content will be a song
+			// or an audiobook.
+			// If it is a song, we check the genre and whether the genre exists in the genre map (Key: genre, Value: arrayList of
+			// indexes where the genre occurs), if it does we just get the arraylist and add the current index to it and
+			// put it back in the map. If the key doesn't exist, we create a new arraylist and add the current index.
+			// This same process is then done for the artist of the song.
+			// If the content is an audiobook, the same process is done as if it was a song with an artist.
 			try {
 				contents = readStoreFile();	
 
@@ -74,13 +88,20 @@ public class AudioContentStore
 					}
 
 				}
-	
+
+			// This catch block catches the io exception thrown by readFileStore, which is a filenotfound exception
+			// It will print out the error message and then exit the program.
 			} catch (IOException e) {
 				System.out.println(e.getMessage());
 				System.exit(1);
 			}
 		}
 
+		// This method opens the store text file and reads it line by line\
+		// If it hits a key word (SONG or AUDIOBOOK) it will then read a certain amount of the next lines
+		// putting the information from each line into variables which are then used to create a new
+		// audiocontent object.
+		// It will throw an exception if it encounters an error with the file (filenotfound error)
 		private ArrayList<AudioContent> readStoreFile() throws FileNotFoundException
 		{
 			ArrayList<AudioContent> contentFromStore = new ArrayList<AudioContent>();
@@ -157,7 +178,8 @@ public class AudioContentStore
 			return contentFromStore;
 		}
 
-		// Convert genre string from file to Song.Genre so it can be used in the song constructor
+		// I created a small method to just quickly/easily convert the string read from the text file
+		// to the Song.Genre type so it can be used in the constructor
 		private Song.Genre toGenre(String genre)
 		{
 			if (genre.equalsIgnoreCase("POP")) 		{return Song.Genre.POP; }
@@ -169,12 +191,13 @@ public class AudioContentStore
 			return null;
 		}
 
-		
+		// Accessor method, return the map of artists and their corresponding indexes in the store 
 		public Map<String, ArrayList<Integer>> getArtistsAuthors() 
 		{
 			return artistAuthorIndexes;
 		}
 
+		// Accessor method, return the map of genres and their corresponding indexes in the store 
 		public Map<String, ArrayList<Integer>> getGenres() 
 		{
 			return genreIndexes;
@@ -200,6 +223,8 @@ public class AudioContentStore
 			}
 		}
 
+		// Simple search function that takes a string (the title of content being looked for) and
+		// then printing the related info
 		public void search(String title) 
 		{
 			int indexInStore = titleIndex.get(title);
@@ -209,9 +234,10 @@ public class AudioContentStore
 
 		}
 
+		// Uses the map of artists/authors and the related indexes to quickly search
+		// and print the list of songs/audiobooks by the specified person 
 		public void searchA(String artistOrAuthor) 
 		{
-
 			ArrayList<Integer> indexesInStore = artistAuthorIndexes.get(artistOrAuthor);
 			for (int i = 0; i < indexesInStore.size(); i++) {
 				int indexInStore = indexesInStore.get(i);
@@ -222,6 +248,8 @@ public class AudioContentStore
 
 		}
 
+		// Uses the map of genres and the related indexes to quickly search
+		// and print the list of songs that fall under that genre 
 		public void searchG(String genre) 
 		{
 			ArrayList<Integer> indexesInStore = genreIndexes.get(genre);
@@ -234,6 +262,9 @@ public class AudioContentStore
 
 		}
 		
+		// Takes in a string to be searched for and then loops through all the contents in the store
+		// calling the checKContent function I wrote to see if there are any matches between the string
+		// and anything related to each piece of audio content.
 		public void searchP(String forThisString)
 		{
 
@@ -255,6 +286,9 @@ public class AudioContentStore
 
 		}
 		
+		// This method takes an audiocontent object and a substring/string, if the object
+		// contains the substring in the title, artist/author, lyrics/chapters, etc.
+		// then the function returns true for the above function.
 		private boolean checkContent(AudioContent content, String substr)
 		{
 			substr = substr.toLowerCase();
